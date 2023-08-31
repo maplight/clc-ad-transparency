@@ -64,14 +64,20 @@
       "required": true
     },
     "adMedia": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true,
+      ]
+    },
+    "candidatesMeasuresAndPoliticalParties": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ad-disclosure.candidates-measures-and-or-political-parties",
       "required": true
     }
   }
