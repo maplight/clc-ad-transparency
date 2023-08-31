@@ -2,8 +2,18 @@
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
-### `develop`
+## Pre-requisites if you are cloning this repo
+### Install Strapi
+```
+npm add @strapi/strapi
+# or
+yarn add @strapi/strapi
+```
+### Set up .env
+Copy `.env.example` to `.env` and replace values with random strings
 
+## Running the app
+### `develop`
 Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
 
 ```
