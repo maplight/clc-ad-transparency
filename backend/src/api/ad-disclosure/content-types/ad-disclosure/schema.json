@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ad_disclosures",
+  "info": {
+    "singularName": "ad-disclosure",
+    "pluralName": "ad-disclosures",
+    "displayName": "Ad Disclosure",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "adFormat": {
+      "type": "enumeration",
+      "enum": [
+        "Digital",
+        "Print",
+        "Direct Mail",
+        "Tv",
+        "Radio"
+      ],
+      "required": true
+    },
+    "adSpend": {
+      "type": "decimal",
+      "required": true
+    },
+    "targetAudience": {
+      "type": "text"
+    },
+    "viewCount": {
+      "type": "integer"
+    },
+    "clickCount": {
+      "type": "integer"
+    },
+    "authorizedAdSpend": {
+      "type": "decimal"
+    },
+    "externalLink": {
+      "type": "string",
+      "regex": "^(http(s):\\/\\/.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$"
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    },
+    "adTextContent": {
+      "type": "text"
+    },
+    "adElection": {
+      "type": "enumeration",
+      "enum": [
+        "Election 1",
+        "Election 2",
+        "Election 3"
+      ],
+      "required": true
+    },
+    "adMedia": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}
