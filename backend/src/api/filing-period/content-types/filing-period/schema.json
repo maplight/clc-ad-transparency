@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "filing_periods",
+  "info": {
+    "singularName": "filing-period",
+    "pluralName": "filing-periods",
+    "displayName": "Filing Period",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    }
+  }
+}
