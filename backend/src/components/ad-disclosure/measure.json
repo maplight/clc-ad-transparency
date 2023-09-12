@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_ad_disclosure_measures",
+  "info": {
+    "displayName": "Measure",
+    "icon": "file",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "enumeration",
+      "enum": [
+        "Measure 1",
+        "Measure 2",
+        "Measure 3",
+        "Measure 4",
+        "Measure 5"
+      ],
+      "required": true
+    },
+    "stance": {
+      "type": "enumeration",
+      "enum": [
+        "Supports",
+        "Opposes",
+        "Neither"
+      ],
+      "required": true
+    }
+  }
+}

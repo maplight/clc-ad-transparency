@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_ad_disclosure_candidates",
+  "info": {
+    "displayName": "Candidate",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "enumeration",
+      "enum": [
+        "Candidate 1",
+        "Candidate 2",
+        "Candidate 3"
+      ],
+      "required": true
+    },
+    "stance": {
+      "type": "enumeration",
+      "enum": [
+        "Supports",
+        "Opposes",
+        "Neither"
+      ],
+      "required": true
+    }
+  }
+}
