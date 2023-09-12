@@ -75,9 +75,12 @@
       ]
     },
     "candidatesMeasuresAndPoliticalParties": {
-      "type": "component",
-      "repeatable": true,
-      "component": "ad-disclosure.candidates-measures-and-or-political-parties",
+      "type": "dynamiczone",
+      "components": [
+        "ad-disclosure.candidate",
+        "ad-disclosure.measure",
+        "ad-disclosure.political-party"
+      ],
       "required": true
     }
   }
