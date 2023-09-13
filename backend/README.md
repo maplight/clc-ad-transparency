@@ -10,7 +10,8 @@ npm add @strapi/strapi
 yarn add @strapi/strapi
 ```
 ### Set up .env
-Copy `.env.example` to `.env` and replace values with random strings
+1. Copy `.env.example` to `.env` and replace values with random strings
+1. Add algolia keys, values from the clc ad transparency development application `ALGOLIA_PROVIDER_APPLICATION_ID` and `ALGOLIA_PROVIDER_ADMIN_API_KEY` 
 
 ## Running the app
 ### `develop`
