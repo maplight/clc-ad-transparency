@@ -1,45 +1,31 @@
 import { prefixPluginTranslations } from '@strapi/helper-plugin';
-
-import pluginPkg from '../../package.json';
+import AdDisclosureTableIcon from './components/AdDisclosureTable/AdDisclosureTableIcon';
+import getTrad from './utils/getTrad';
 import pluginId from './pluginId';
-import Initializer from './components/Initializer';
-import PluginIcon from './components/PluginIcon';
-
-const name = pluginPkg.strapi.name;
 
 export default {
   register(app: any) {
-    app.addMenuLink({
-      to: `/plugins/${pluginId}`,
-      icon: PluginIcon,
+    app.customFields.register({
+      name: 'ad-disclosure-table',
+      pluginId: 'ad-disclosure-report',
+      type: 'string',
+      icon: AdDisclosureTableIcon,
       intlLabel: {
-        id: `${pluginId}.plugin.name`,
-        defaultMessage: name,
+        id: getTrad('ad-disclosure-table.label'),
+        defaultMessage: 'Ad Disclosure Table',
       },
-      Component: async () => {
-        const component = await import(/* webpackChunkName: "[request]" */ './pages/App');
-
-        return component;
+      intlDescription: {
+        id: getTrad('ad-disclosure-table.description'),
+        defaultMessage: 'Display a table of ad disclosures for a filing period.',
       },
-      permissions: [
-        // Uncomment to set the permissions of the plugin here
-        // {
-        //   action: '', // the action name should be plugin::plugin-name.actionType
-        //   subject: null,
-        // },
-      ],
+      components: {
+        Input: async () =>
+          import(
+            /* webpackChunkName: 'ad-disclosure-table-component' */ './components/AdDisclosureTable'
+          ),
+      },
     });
-    const plugin = {
-      id: pluginId,
-      initializer: Initializer,
-      isReady: false,
-      name,
-    };
-
-    app.registerPlugin(plugin);
   },
-
-  bootstrap(app: any) {},
 
   async registerTrads(app: any) {
     const { locales } = app;

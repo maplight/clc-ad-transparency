@@ -1,5 +1,13 @@
 import { Strapi } from '@strapi/strapi';
 
 export default ({ strapi }: { strapi: Strapi }) => {
-  // register phase
+  strapi.customFields.register({
+    name: "ad-disclosure-table",
+    plugin: "ad-disclosure-report",
+    type: "string",
+    inputSize: {
+      default: 4,
+      isResizable: true,
+    },
+  });
 };
