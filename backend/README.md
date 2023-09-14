@@ -57,6 +57,14 @@ yarn build
 
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
 
+## Database
+
+Transfer the production database into your local dev environment, replacing `PRODUCTION_ADMIN_URL` with the current production URL.
+
+`yarn strapi transfer --from {PRODUCTION_ADMIN_URL}`
+
+When prompted, copy and paste the Production Transfer Token from 1Password.
+
 ## 📚 Learn more
 
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.
