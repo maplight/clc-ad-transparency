@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reports",
+  "info": {
+    "singularName": "report",
+    "pluralName": "reports",
+    "displayName": "Report",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "filingPeriod": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::filing-period.filing-period"
+    }
+  }
+}
