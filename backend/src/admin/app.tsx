@@ -3,9 +3,18 @@ export default {
     locales: ['en'],
     translations: {
       en: {
-        "app.components.LeftMenu.navbrand.title": "Ad Transparency DB",
-        "Auth.form.welcome.title": "CLC Ad Transparency DB",
-        "Auth.form.welcome.subtitle": "Log in to your account",
+        "app.components.LeftMenu.navbrand.title": "Ad Disclosure Dashboard",
+        "app.components.LeftMenuLinkContainer.collectionTypes": "Data Types",
+        "Auth.form.welcome.subtitle": "Log in to your Ad Disclosure account",
+        "Auth.form.welcome.title": "Welcome to Ad Disclosure!",
+        "content-manager.components.LeftMenu.collection-types": "Data Types",
+        "content-manager.containers.SettingsPage.Block.contentType.title": "Data Types",
+        "content-manager.header.name": "Filings",
+        "content-manager.models": "Data Types",
+        "content-manager.models.numbered": "Data Types ({number})",
+        "global.content-manager": "Filings Manager",
+        "menu.section.models.name": "Data Types",
+        "Settings.permissions.users.listview.header.subtitle": "All the users of the Ad Disclosure system",
       }
     },
     theme: {
