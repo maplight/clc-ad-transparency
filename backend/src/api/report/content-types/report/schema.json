@@ -2,10 +2,10 @@
   "kind": "collectionType",
   "collectionName": "reports",
   "info": {
-    "singularName": "report",
-    "pluralName": "reports",
+    "description": "",
     "displayName": "Report",
-    "description": ""
+    "pluralName": "reports",
+    "singularName": "report"
   },
   "options": {
     "draftAndPublish": false
@@ -16,6 +16,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::filing-period.filing-period"
+    },
+    "adDisclosures": {
+      "type": "customField",
+      "customField": "plugin::ad-disclosure-report.ad-disclosure-table"
     }
   }
 }
