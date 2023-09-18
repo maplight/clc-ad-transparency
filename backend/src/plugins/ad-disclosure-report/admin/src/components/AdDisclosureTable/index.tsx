@@ -1,131 +1,129 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
 import {
-  Avatar,
-  BaseCheckbox,
   Box,
-  Flex,
-  IconButton,
+  EmptyStateLayout,
   Table,
   Tbody,
   Td,
-  TFooter,
   Th,
   Thead,
   Tr,
   Typography,
-  VisuallyHidden,
 } from '@strapi/design-system';
-import { Trash, Pencil, Plus } from '@strapi/icons';
+import {
+  useCMEditViewDataManager,
+} from '@strapi/helper-plugin';
+import useAdDisclosureReportData from '../../hooks/use-ad-disclosure-report-data';
+import useIsAdmin from '../../hooks/use-is-admin';
 
-const ROW_COUNT = 6;
-const COL_COUNT = 10;
-const entries = [
-  {
-    id: 1,
-    cover: 'https://avatars.githubusercontent.com/u/3874873?v=4',
-    description: 'Chez Léon is a human sized Parisian',
-    category: 'French cuisine',
-    contact: 'Leon Lafrite'
-  },
-  {
-    id: 2,
-    cover: 'https://avatars.githubusercontent.com/u/3874873?v=4',
-    description: 'Chez Léon is a human sized Parisian',
-    category: 'French cuisine',
-    contact: 'Leon Lafrite'
-  },
-  {
-    id: 3,
-    cover: 'https://avatars.githubusercontent.com/u/3874873?v=4',
-    description: 'Chez Léon is a human sized Parisian',
-    category: 'French cuisine',
-    contact: 'Leon Lafrite'
-  },
-  {
-    id: 4,
-    cover: 'https://avatars.githubusercontent.com/u/3874873?v=4',
-    description: 'Chez Léon is a human sized Parisian',
-    category: 'French cuisine',
-    contact: 'Leon Lafrite'
-  },
-  {
-    id: 5,
-    cover: 'https://avatars.githubusercontent.com/u/3874873?v=4',
-    description: 'Chez Léon is a human sized Parisian',
-    category: 'French cuisine',
-    contact: 'Leon Lafrite'
-  },
-  {
-    id: 6,
-    cover: 'https://avatars.githubusercontent.com/u/3874873?v=4',
-    description: 'Chez Léon is a human sized Parisian',
-    category: 'French cuisine',
-    contact: 'Leon Lafrite'
+// TODO: We can probably infer this type from the schema
+type AdDisclosure = {
+  attributes: {
+    adFormat: string;
+    adSpend: string;
+    targetAudience: string;
   }
-];
+  id: number;
+}
 
-const AdDisclosureTable = (): ReactElement => {
+const AdDisclosureTable = ({ attribute,  name, onChange, value }): ReactElement => {
+  const { fetchAdDisclosures, fetchFilingPeriod } = useAdDisclosureReportData();
+  const isAdmin = useIsAdmin();
+
+  console.log(isAdmin)
+
+  const {
+    modifiedData:  {
+      filingPeriod: modifiedFilingPeriod,
+    },
+  } = useCMEditViewDataManager();
+
+  const [adDisclosures, setAdDisclosures] = useState<AdDisclosure[]>(
+    value ? JSON.parse(value) : []
+  );
+
+  const handleChange = (value: string) => {
+    onChange({ target: { name, value, type: attribute.type } });
+  }
+
+  const populateAdDisclosures = async (selectedFilingPeriodId: number) => {
+    const filingPeriod = await fetchFilingPeriod(selectedFilingPeriodId);
+
+    if (filingPeriod) {
+      const { startDate, endDate } = filingPeriod.attributes;
+
+      const adDisclosures = await fetchAdDisclosures(startDate, endDate);
+
+      if (adDisclosures) {
+        handleChange(JSON.stringify(adDisclosures));
+        setAdDisclosures(adDisclosures);
+      }
+    }
+  }
+
+  useEffect(() => {
+    // Don't fetch ad disclosures if user is an admin
+    if (isAdmin) return;
+
+    const selectedFilingPeriod = modifiedFilingPeriod?.[0];
+
+    if (selectedFilingPeriod) {
+      populateAdDisclosures(selectedFilingPeriod.id);
+    } else {
+      // Reset ad disclosures if filing period is deselected
+      handleChange(JSON.stringify([]));
+      setAdDisclosures([]);
+    }
+  }, [modifiedFilingPeriod]);
+
   return (
     <Box padding={8} background="neutral100">
-      <Table colCount={COL_COUNT} rowCount={ROW_COUNT} footer={<TFooter icon={<Plus />}>Add another field to this collection type</TFooter>}>
+      <Table colCount={adDisclosures.length} rowCount={adDisclosures.length}>
         <Thead>
           <Tr>
-            <Th>
-              <BaseCheckbox aria-label="Select all entries" />
-            </Th>
             <Th>
               <Typography variant="sigma">ID</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Cover</Typography>
+              <Typography variant="sigma">Ad Format</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Description</Typography>
+              <Typography variant="sigma">Ad Spend</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Categories</Typography>
-            </Th>
-            <Th>
-              <Typography variant="sigma">Contact</Typography>
-            </Th>
-            <Th>
-              <VisuallyHidden>Actions</VisuallyHidden>
+              <Typography variant="sigma">Target Audience</Typography>
             </Th>
           </Tr>
         </Thead>
         <Tbody>
-          {entries.map(entry => <Tr key={entry.id}>
-              <Td>
-                <BaseCheckbox aria-label={`Select ${entry.contact}`} />
-              </Td>
-              <Td>
-                <Typography textColor="neutral800">{entry.id}</Typography>
-              </Td>
-              <Td>
-                <Avatar src={entry.cover} alt={entry.contact} />
-              </Td>
-              <Td>
-                <Typography textColor="neutral800">{entry.description}</Typography>
-              </Td>
-              <Td>
-                <Typography textColor="neutral800">{entry.category}</Typography>
-              </Td>
-              <Td>
-                <Typography textColor="neutral800">{entry.contact}</Typography>
-              </Td>
-              <Td>
-                <Flex>
-                  <a href="https://www.google.com" target="_blank" rel="noreferrer">
-                    G
-                  </a>
-                  <IconButton onClick={() => console.log('edit')} label="Edit" noBorder icon={<Pencil />} />
-                  <Box paddingLeft={1}>
-                    <IconButton onClick={() => console.log('delete')} label="Delete" noBorder icon={<Trash />} />
-                  </Box>
-                </Flex>
-              </Td>
-            </Tr>)}
+          {adDisclosures.length > 0 ? adDisclosures?.map(adDisclosure => {
+            const { attributes, id } = adDisclosure;
+            return (
+              <Tr key={id}>
+                <Td>
+                  <Typography textColor="neutral800">{id}</Typography>
+                </Td>
+                <Td>
+                <Typography textColor="neutral800">{attributes.adFormat}</Typography>
+                </Td>
+                <Td>
+                  <Typography textColor="neutral800">{attributes.adSpend}</Typography>
+                </Td>
+                <Td>
+                  <Typography textColor="neutral800">{attributes.targetAudience}</Typography>
+                </Td>
+              </Tr>
+            )}) : (
+              <Tr>
+                <Td colSpan={4}>
+                  <EmptyStateLayout
+                    content="Select a Filing Period to view Ad Disclosures."
+                    shadow="none"
+                  />
+                </Td>
+              </Tr>
+            )}
         </Tbody>
       </Table>
     </Box>

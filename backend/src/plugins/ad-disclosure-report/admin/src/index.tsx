@@ -8,7 +8,7 @@ export default {
     app.customFields.register({
       name: 'ad-disclosure-table',
       pluginId: 'ad-disclosure-report',
-      type: 'string',
+      type: 'json',
       icon: AdDisclosureTableIcon,
       intlLabel: {
         id: getTrad('ad-disclosure-table.label'),

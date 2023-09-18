@@ -81,7 +81,8 @@
   },
   "kind": "collectionType",
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": false,
+    "populateCreatorFields": true
   },
   "pluginOptions": {}
 }
