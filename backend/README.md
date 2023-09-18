@@ -42,6 +42,17 @@ npm run build
 yarn build
 ```
 
+## Modifying the look and feel
+### Text
+
+1. Find the translation token for the text you are looking to change
+```
+ grep -inr --include \*.json "Text to change" ./node_modules/\@strapi
+```
+2. Add the token and new text to the [overide file](src/admin/app.tsx)
+3. `yarn build`
+
+
 ## ⚙️ Deployment
 
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
