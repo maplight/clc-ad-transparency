@@ -20,8 +20,6 @@ export default {
           primary600: '#035651',
           primary700: '#384B42',
         },
-          
-
       },
     },
   },
