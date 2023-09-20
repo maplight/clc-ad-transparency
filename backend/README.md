@@ -42,6 +42,34 @@ npm run build
 yarn build
 ```
 
+### Building `ad-disclosure-report` plugin locally
+
+1. Install plugin dependencies
+
+```
+cd src/plugins/ad-disclosure-report
+yarn
+```
+
+2. Transpile TypeScript files to `dist`
+
+```
+yarn build
+```
+
+3. Rebuild project from root
+
+```
+cd ../../../
+yarn build
+```
+
+4. Run in watch mode, which enables hot-reloading plugin
+
+```
+yarn develop --watch-admin
+```
+
 ## Modifying the look and feel
 ### Text
 
