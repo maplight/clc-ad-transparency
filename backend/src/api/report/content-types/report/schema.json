@@ -1,5 +1,15 @@
 {
-  "kind": "collectionType",
+  "attributes": {
+    "adDisclosures": {
+      "customField": "plugin::ad-disclosure-report.ad-disclosure-table",
+      "type": "customField"
+    },
+    "filingPeriod": {
+      "relation": "oneToOne",
+      "target": "api::filing-period.filing-period",
+      "type": "relation"
+    }
+  },
   "collectionName": "reports",
   "info": {
     "description": "",
@@ -7,19 +17,9 @@
     "pluralName": "reports",
     "singularName": "report"
   },
+  "kind": "collectionType",
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
-  "attributes": {
-    "filingPeriod": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::filing-period.filing-period"
-    },
-    "adDisclosures": {
-      "type": "customField",
-      "customField": "plugin::ad-disclosure-report.ad-disclosure-table"
-    }
-  }
+  "pluginOptions": {}
 }
