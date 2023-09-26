@@ -10,3 +10,23 @@ index c259beb..cb4ab10 100644
          workplace={formatMessage({
            id: 'app.components.LeftMenu.navbrand.workplace',
            defaultMessage: 'Workplace',
+diff --git a/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js b/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js
+index 9e6f8a7..befec42 100644
+--- a/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js
++++ b/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js
+@@ -50,15 +50,6 @@ const LeftMenu = () => {
+           searchable: true,
+           links: collectionTypeLinks,
+         },
+-        {
+-          id: 'singleTypes',
+-          title: {
+-            id: getTrad('components.LeftMenu.single-types'),
+-            defaultMessage: 'Single Types',
+-          },
+-          searchable: true,
+-          links: singleTypeLinks,
+-        },
+       ].map((section) => ({
+         ...section,
+         links: section.links
