@@ -1,29 +1,29 @@
 {
-  "kind": "collectionType",
+  "attributes": {
+    "endDate": {
+      "required": true,
+      "type": "date"
+    },
+    "name": {
+      "required": true,
+      "type": "string",
+      "unique": true
+    },
+    "startDate": {
+      "required": true,
+      "type": "date"
+    }
+  },
   "collectionName": "filing_periods",
   "info": {
-    "singularName": "filing-period",
-    "pluralName": "filing-periods",
+    "description": "",
     "displayName": "Filing Period",
-    "description": ""
+    "pluralName": "filing-periods",
+    "singularName": "filing-period"
   },
+  "kind": "collectionType",
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
-  "attributes": {
-    "name": {
-      "type": "string",
-      "unique": true,
-      "required": true
-    },
-    "startDate": {
-      "type": "date",
-      "required": true
-    },
-    "endDate": {
-      "type": "date",
-      "required": true
-    }
-  }
+  "pluginOptions": {}
 }

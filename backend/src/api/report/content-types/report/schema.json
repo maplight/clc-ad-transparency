@@ -1,0 +1,25 @@
+{
+  "attributes": {
+    "adDisclosures": {
+      "customField": "plugin::ad-disclosure-report.ad-disclosure-table",
+      "type": "customField"
+    },
+    "filingPeriod": {
+      "relation": "oneToOne",
+      "target": "api::filing-period.filing-period",
+      "type": "relation"
+    }
+  },
+  "collectionName": "reports",
+  "info": {
+    "description": "",
+    "displayName": "Report",
+    "pluralName": "reports",
+    "singularName": "report"
+  },
+  "kind": "collectionType",
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {}
+}

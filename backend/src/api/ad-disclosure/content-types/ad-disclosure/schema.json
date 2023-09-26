@@ -1,19 +1,15 @@
 {
-  "kind": "collectionType",
-  "collectionName": "ad_disclosures",
-  "info": {
-    "singularName": "ad-disclosure",
-    "pluralName": "ad-disclosures",
-    "displayName": "Ad Disclosure",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
   "attributes": {
+    "adElection": {
+      "enum": [
+        "Election 1",
+        "Election 2",
+        "Election 3"
+      ],
+      "required": true,
+      "type": "enumeration"
+    },
     "adFormat": {
-      "type": "enumeration",
       "enum": [
         "Digital",
         "Print",
@@ -21,67 +17,72 @@
         "Tv",
         "Radio"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
+    },
+    "adMedia": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "multiple": true,
+      "required": true,
+      "type": "media"
     },
     "adSpend": {
-      "type": "decimal",
-      "required": true
+      "required": true,
+      "type": "decimal"
+    },
+    "adTextContent": {
+      "type": "text"
+    },
+    "authorizedAdSpend": {
+      "type": "decimal"
+    },
+    "candidatesMeasuresAndPoliticalParties": {
+      "components": [
+        "ad-disclosure.candidate",
+        "ad-disclosure.measure",
+        "ad-disclosure.political-party"
+      ],
+      "required": true,
+      "type": "dynamiczone"
+    },
+    "clickCount": {
+      "type": "integer"
+    },
+    "endDate": {
+      "required": true,
+      "type": "date"
+    },
+    "externalLink": {
+      "regex": "^(http(s):\\/\\/.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$",
+      "type": "string"
+    },
+    "startDate": {
+      "required": true,
+      "type": "date"
     },
     "targetAudience": {
       "type": "text"
     },
     "viewCount": {
       "type": "integer"
-    },
-    "clickCount": {
-      "type": "integer"
-    },
-    "authorizedAdSpend": {
-      "type": "decimal"
-    },
-    "externalLink": {
-      "type": "string",
-      "regex": "^(http(s):\\/\\/.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$"
-    },
-    "startDate": {
-      "type": "date",
-      "required": true
-    },
-    "endDate": {
-      "type": "date",
-      "required": true
-    },
-    "adTextContent": {
-      "type": "text"
-    },
-    "adElection": {
-      "type": "enumeration",
-      "enum": [
-        "Election 1",
-        "Election 2",
-        "Election 3"
-      ],
-      "required": true
-    },
-    "adMedia": {
-      "type": "media",
-      "multiple": true,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "candidatesMeasuresAndPoliticalParties": {
-      "type": "dynamiczone",
-      "components": [
-        "ad-disclosure.candidate",
-        "ad-disclosure.measure",
-        "ad-disclosure.political-party"
-      ],
-      "required": true
     }
-  }
+  },
+  "collectionName": "ad_disclosures",
+  "info": {
+    "description": "",
+    "displayName": "Ad Disclosure",
+    "pluralName": "ad-disclosures",
+    "singularName": "ad-disclosure"
+  },
+  "kind": "collectionType",
+  "options": {
+    "draftAndPublish": false,
+    "populateCreatorFields": true
+  },
+  "pluginOptions": {}
 }

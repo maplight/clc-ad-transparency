@@ -42,6 +42,34 @@ npm run build
 yarn build
 ```
 
+### Building `ad-disclosure-report` plugin locally
+
+1. Install plugin dependencies
+
+```
+cd src/plugins/ad-disclosure-report
+yarn
+```
+
+2. Transpile TypeScript files to `dist`
+
+```
+yarn build
+```
+
+3. Rebuild project from root
+
+```
+cd ../../../
+yarn build
+```
+
+4. Run in watch mode, which enables hot-reloading plugin
+
+```
+yarn develop --watch-admin
+```
+
 ## Modifying the look and feel
 ### Text
 
@@ -56,6 +84,14 @@ yarn build
 ## ⚙️ Deployment
 
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+
+## Database
+
+Transfer the production database into your local dev environment, replacing `PRODUCTION_ADMIN_URL` with the current production URL.
+
+`yarn strapi transfer --from {PRODUCTION_ADMIN_URL}`
+
+When prompted, copy and paste the Production Transfer Token from 1Password.
 
 ## 📚 Learn more
 
