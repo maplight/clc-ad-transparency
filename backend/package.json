@@ -1,6 +1,5 @@
 {
   "name": "backend",
-  "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
@@ -28,5 +27,9 @@
     "node": ">=16.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "./src/plugins/ad-disclosure-report"
+  ]
 }
