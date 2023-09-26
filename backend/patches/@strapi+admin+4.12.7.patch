@@ -30,3 +30,21 @@ index 9e6f8a7..befec42 100644
        ].map((section) => ({
          ...section,
          links: section.links
+diff --git a/node_modules/@strapi/admin/admin/src/hooks/useMenu/utils/getGeneralLinks.js b/node_modules/@strapi/admin/admin/src/hooks/useMenu/utils/getGeneralLinks.js
+index fac6937..1fe141f 100644
+--- a/node_modules/@strapi/admin/admin/src/hooks/useMenu/utils/getGeneralLinks.js
++++ b/node_modules/@strapi/admin/admin/src/hooks/useMenu/utils/getGeneralLinks.js
+@@ -2,7 +2,13 @@ import cloneDeep from 'lodash/cloneDeep';
+
+ import checkPermissions from './checkPermissions';
+
++//only super admins should have this setting
++const UPDATE_PROJECT_SETTINGS = 'admin::project-settings.update';
++
+ const getGeneralLinks = async (userPermissions, generalSectionRawLinks, shouldUpdateStrapi) => {
++  if (!userPermissions.some((permission) => permission.action ===UPDATE_PROJECT_SETTINGS)){
++    return [];
++  }
+   const generalSectionPermissionsPromises = checkPermissions(
+     userPermissions,
+     generalSectionRawLinks
