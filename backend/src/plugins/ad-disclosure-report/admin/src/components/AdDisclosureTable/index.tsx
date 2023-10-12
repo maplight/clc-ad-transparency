@@ -16,22 +16,15 @@ import {
 } from '@strapi/helper-plugin';
 import useAdDisclosureReportData from '../../hooks/use-ad-disclosure-report-data';
 import useIsAdmin from '../../hooks/use-is-admin';
+import type { ApiAdDisclosureAdDisclosure } from '../../../../../../../types/generated/contentTypes';
 
-// TODO: We can probably infer this type from the schema
-type AdDisclosure = {
-  attributes: {
-    adFormat: string;
-    adSpend: string;
-    targetAudience: string;
-  }
+type AdDisclosure = ApiAdDisclosureAdDisclosure & {
   id: number;
 }
 
 const AdDisclosureTable = ({ attribute,  name, onChange, value }): ReactElement => {
   const { fetchAdDisclosures, fetchFilingPeriod } = useAdDisclosureReportData();
   const isAdmin = useIsAdmin();
-
-  console.log(isAdmin)
 
   const {
     modifiedData:  {
