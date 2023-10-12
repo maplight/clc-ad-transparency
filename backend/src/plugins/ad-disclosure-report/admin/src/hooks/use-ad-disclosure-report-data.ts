@@ -10,10 +10,12 @@ const useAdDisclosureReportData = () => {
     try {
       const userInfo = auth.get('userInfo')
 
+      const hasUserInfo = userInfo && typeof userInfo !== 'string';
+
       const filters = [
         `[endDate][$gte]=${filingPeriodStartDate}`,
         `[endDate][$lte]=${filingPeriodEndDate}`,
-        `[createdBy][id][$eq]=${userInfo.id}`,
+         hasUserInfo ? `[createdBy][id][$eq]=${userInfo.id}` : '',
       ];
 
       const url = `/api/ad-disclosures?${filters.map((filter, index) => `filters[$and][${index}]${filter}&`).join('')}&populate=*`;
