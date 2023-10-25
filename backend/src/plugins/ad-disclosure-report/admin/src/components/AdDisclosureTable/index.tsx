@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import type { ReactElement } from 'react';
+import React, { useEffect, useState } from "react";
+import type { ReactElement } from "react";
 import {
   Box,
   EmptyStateLayout,
@@ -10,26 +10,27 @@ import {
   Thead,
   Tr,
   Typography,
-} from '@strapi/design-system';
-import {
-  useCMEditViewDataManager,
-} from '@strapi/helper-plugin';
-import useAdDisclosureReportData from '../../hooks/use-ad-disclosure-report-data';
-import useIsAdmin from '../../hooks/use-is-admin';
-import type { ApiAdDisclosureAdDisclosure } from '../../../../../../../types/generated/contentTypes';
+} from "@strapi/design-system";
+import { useCMEditViewDataManager } from "@strapi/helper-plugin";
+import useAdDisclosureReportData from "../../hooks/use-ad-disclosure-report-data";
+import useIsAdmin from "../../hooks/use-is-admin";
+import type { ApiAdDisclosureAdDisclosure } from "../../../../../../../types/generated/contentTypes";
 
 type AdDisclosure = ApiAdDisclosureAdDisclosure & {
   id: number;
-}
+};
 
-const AdDisclosureTable = ({ attribute,  name, onChange, value }): ReactElement => {
+const AdDisclosureTable = ({
+  attribute,
+  name,
+  onChange,
+  value,
+}): ReactElement => {
   const { fetchAdDisclosures, fetchFilingPeriod } = useAdDisclosureReportData();
   const isAdmin = useIsAdmin();
 
   const {
-    modifiedData:  {
-      filingPeriod: modifiedFilingPeriod,
-    },
+    modifiedData: { filingPeriod: modifiedFilingPeriod },
   } = useCMEditViewDataManager();
 
   const [adDisclosures, setAdDisclosures] = useState<AdDisclosure[]>(
@@ -38,7 +39,7 @@ const AdDisclosureTable = ({ attribute,  name, onChange, value }): ReactElement 
 
   const handleChange = (value: string) => {
     onChange({ target: { name, value, type: attribute.type } });
-  }
+  };
 
   const populateAdDisclosures = async (selectedFilingPeriodId: number) => {
     const filingPeriod = await fetchFilingPeriod(selectedFilingPeriodId);
@@ -53,7 +54,7 @@ const AdDisclosureTable = ({ attribute,  name, onChange, value }): ReactElement 
         setAdDisclosures(adDisclosures);
       }
     }
-  }
+  };
 
   useEffect(() => {
     // Don't fetch ad disclosures if user is an admin
@@ -90,37 +91,46 @@ const AdDisclosureTable = ({ attribute,  name, onChange, value }): ReactElement 
           </Tr>
         </Thead>
         <Tbody>
-          {adDisclosures.length > 0 ? adDisclosures?.map(adDisclosure => {
-            const { attributes, id } = adDisclosure;
-            return (
-              <Tr key={id}>
-                <Td>
-                  <Typography textColor="neutral800">{id}</Typography>
-                </Td>
-                <Td>
-                <Typography textColor="neutral800">{attributes.adFormat}</Typography>
-                </Td>
-                <Td>
-                  <Typography textColor="neutral800">{attributes.adSpend}</Typography>
-                </Td>
-                <Td>
-                  <Typography textColor="neutral800">{attributes.targetAudience}</Typography>
-                </Td>
-              </Tr>
-            )}) : (
-              <Tr>
-                <Td colSpan={4}>
-                  <EmptyStateLayout
-                    content="Select a Filing Period to view Ad Disclosures."
-                    shadow="none"
-                  />
-                </Td>
-              </Tr>
-            )}
+          {adDisclosures.length > 0 ? (
+            adDisclosures?.map((adDisclosure) => {
+              const { attributes, id } = adDisclosure;
+              return (
+                <Tr key={id}>
+                  <Td>
+                    <Typography textColor="neutral800">{id}</Typography>
+                  </Td>
+                  <Td>
+                    <Typography textColor="neutral800">
+                      {attributes.adFormat}
+                    </Typography>
+                  </Td>
+                  <Td>
+                    <Typography textColor="neutral800">
+                      {attributes.adSpend}
+                    </Typography>
+                  </Td>
+                  <Td>
+                    <Typography textColor="neutral800">
+                      {attributes.targetAudience}
+                    </Typography>
+                  </Td>
+                </Tr>
+              );
+            })
+          ) : (
+            <Tr>
+              <Td colSpan={4}>
+                <EmptyStateLayout
+                  content="Select a Filing Period to view Ad Disclosures."
+                  shadow="none"
+                />
+              </Td>
+            </Tr>
+          )}
         </Tbody>
       </Table>
     </Box>
-  )
-}
+  );
+};
 
 export default AdDisclosureTable;
