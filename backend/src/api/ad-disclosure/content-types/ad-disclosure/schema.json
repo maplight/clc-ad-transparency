@@ -47,6 +47,7 @@
         "ad-disclosure.measure",
         "ad-disclosure.political-party"
       ],
+      "min": 1,
       "required": true,
       "type": "dynamiczone"
     },
