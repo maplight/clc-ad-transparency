@@ -4,7 +4,7 @@ export default ({ strapi }: { strapi: Strapi }) => {
   strapi.customFields.register({
     name: "ad-disclosure-table",
     plugin: "ad-disclosure-report",
-    type: "string",
+    type: "text",
     inputSize: {
       default: 4,
       isResizable: true,
