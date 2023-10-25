@@ -80,13 +80,10 @@ const AdDisclosureTable = ({
               <Typography variant="sigma">ID</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Ad Format</Typography>
+              <Typography variant="sigma">Ad Election</Typography>
             </Th>
             <Th>
               <Typography variant="sigma">Ad Spend</Typography>
-            </Th>
-            <Th>
-              <Typography variant="sigma">Target Audience</Typography>
             </Th>
           </Tr>
         </Thead>
@@ -101,17 +98,12 @@ const AdDisclosureTable = ({
                   </Td>
                   <Td>
                     <Typography textColor="neutral800">
-                      {attributes.adFormat}
+                      {attributes.adElection}
                     </Typography>
                   </Td>
                   <Td>
                     <Typography textColor="neutral800">
                       {attributes.adSpend}
-                    </Typography>
-                  </Td>
-                  <Td>
-                    <Typography textColor="neutral800">
-                      {attributes.targetAudience}
                     </Typography>
                   </Td>
                 </Tr>
