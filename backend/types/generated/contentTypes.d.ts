@@ -558,7 +558,10 @@ export interface ApiAdDisclosureAdDisclosure extends Schema.CollectionType {
         'ad-disclosure.political-party'
       ]
     > &
-      Attribute.Required;
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     clickCount: Attribute.Integer;
     endDate: Attribute.Date & Attribute.Required;
     externalLink: Attribute.String;
