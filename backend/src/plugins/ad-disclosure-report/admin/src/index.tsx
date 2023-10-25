@@ -1,27 +1,28 @@
-import { prefixPluginTranslations } from '@strapi/helper-plugin';
-import AdDisclosureTableIcon from './components/AdDisclosureTable/AdDisclosureTableIcon';
-import getTrad from './utils/getTrad';
-import pluginId from './pluginId';
+import { prefixPluginTranslations } from "@strapi/helper-plugin";
+import AdDisclosureTableIcon from "./components/AdDisclosureTable/AdDisclosureTableIcon";
+import getTrad from "./utils/getTrad";
+import pluginId from "./pluginId";
 
 export default {
   register(app: any) {
     app.customFields.register({
-      name: 'ad-disclosure-table',
-      pluginId: 'ad-disclosure-report',
-      type: 'string',
+      name: "ad-disclosure-table",
+      pluginId: "ad-disclosure-report",
+      type: "string",
       icon: AdDisclosureTableIcon,
       intlLabel: {
-        id: getTrad('ad-disclosure-table.label'),
-        defaultMessage: 'Ad Disclosure Table',
+        id: getTrad("ad-disclosure-table.label"),
+        defaultMessage: "Ad Disclosure Table",
       },
       intlDescription: {
-        id: getTrad('ad-disclosure-table.description'),
-        defaultMessage: 'Display a table of ad disclosures for a filing period.',
+        id: getTrad("ad-disclosure-table.description"),
+        defaultMessage:
+          "Display a table of ad disclosures for a filing period.",
       },
       components: {
         Input: async () =>
           import(
-            /* webpackChunkName: 'ad-disclosure-table-component' */ './components/AdDisclosureTable'
+            /* webpackChunkName: 'ad-disclosure-table-component' */ "./components/AdDisclosureTable"
           ),
       },
     });
