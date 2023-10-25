@@ -6,9 +6,9 @@ const CREATE_USER_PERMISSION = 'admin::users.create'
 const useIsAdmin = (): boolean => {
   const { allPermissions } = useRBACProvider();
 
-  return allPermissions.some(
+  return allPermissions?.some(
     (permission) => permission.action === CREATE_USER_PERMISSION
-  );
+  ) || false;
 }
 
 export default useIsAdmin;
