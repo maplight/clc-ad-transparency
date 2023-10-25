@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { ReactElement } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Box,
   EmptyStateLayout,
@@ -15,6 +16,11 @@ import { useCMEditViewDataManager } from "@strapi/helper-plugin";
 import useAdDisclosureReportData from "../../hooks/use-ad-disclosure-report-data";
 import useIsAdmin from "../../hooks/use-is-admin";
 import type { ApiAdDisclosureAdDisclosure } from "../../../../../../../types/generated/contentTypes";
+import styled from "styled-components";
+
+const TableRow = styled(Tr)({
+  cursor: "pointer",
+});
 
 type AdDisclosure = ApiAdDisclosureAdDisclosure & {
   id: number;
@@ -26,6 +32,7 @@ const AdDisclosureTable = ({
   onChange,
   value,
 }): ReactElement => {
+  const history = useHistory();
   const { fetchAdDisclosures, fetchFilingPeriod } = useAdDisclosureReportData();
   const isAdmin = useIsAdmin();
 
@@ -92,7 +99,14 @@ const AdDisclosureTable = ({
             adDisclosures?.map((adDisclosure) => {
               const { attributes, id } = adDisclosure;
               return (
-                <Tr key={id}>
+                <TableRow
+                  key={id}
+                  onClick={() =>
+                    history.push(
+                      `/content-manager/collectionType/api::ad-disclosure.ad-disclosure/${id}`
+                    )
+                  }
+                >
                   <Td>
                     <Typography textColor="neutral800">{id}</Typography>
                   </Td>
@@ -106,7 +120,7 @@ const AdDisclosureTable = ({
                       {attributes.adSpend}
                     </Typography>
                   </Td>
-                </Tr>
+                </TableRow>
               );
             })
           ) : (
