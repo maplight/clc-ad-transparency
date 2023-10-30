@@ -627,7 +627,7 @@ export interface ApiReportReport extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    adDisclosures: Attribute.String &
+    adDisclosures: Attribute.Text &
       Attribute.CustomField<'plugin::ad-disclosure-report.ad-disclosure-table'>;
     filingPeriod: Attribute.Relation<
       'api::report.report',
