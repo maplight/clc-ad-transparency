@@ -93,6 +93,15 @@ Transfer the production database into your local dev environment, replacing `PRO
 
 When prompted, copy and paste the Production Transfer Token from 1Password.
 
+## Algolia
+
+The following environment variables are required to [initialize the Algolia search client](https://www.algolia.com/doc/api-client/getting-started/initialize/javascript/?client=javascript):
+
+* `ALGOLIA_APPLICATION_ID`
+* `ALGOLIA_ADMIN_API_KEY`
+
+**NOTE:** The backend should use the Admin API Key from the Algolia dashboard in order to create and update indices.
+
 ## 📚 Learn more
 
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.

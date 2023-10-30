@@ -23,3 +23,12 @@ yarn run dev
 ```
 
 Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
+
+## Algolia
+
+The following environment variables are required to [initialize the Algolia search client](https://www.algolia.com/doc/api-client/getting-started/initialize/javascript/?client=javascript):
+
+* `ALGOLIA_APPLICATION_ID`
+* `ALGOLIA_SEARCH_API_KEY`
+
+**NOTE:** The frontend should use the Search-Only API Key from the Algolia dashboard.
