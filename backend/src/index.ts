@@ -1,5 +1,6 @@
 import algoliaClient from "./utils/algolia-client";
 import clearData from "./utils/clear-data";
+import generateFilingPeriodData from "./utils/generate-filing-period-data";
 
 const AD_DISCLOSURE_MODEL_UID = "api::ad-disclosure.ad-disclosure";
 const REPORT_MODEL_UID = "api::report.report";
@@ -31,6 +32,9 @@ export default {
     if (shouldSeedDatabase) {
       // Clear data before seeding
       await clearData(strapi);
+
+      // Generate filing period data
+      await generateFilingPeriodData(strapi);
     }
 
     strapi.db.lifecycles.subscribe({
