@@ -12,6 +12,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@faker-js/faker": "^8.2.0",
     "@strapi/plugin-i18n": "4.14.4",
     "@strapi/strapi": "4.14.4",
     "algoliasearch": "^4.20.0",
