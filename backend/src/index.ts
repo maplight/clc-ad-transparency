@@ -1,5 +1,6 @@
 import algoliaClient from "./utils/algolia-client";
 import clearData from "./utils/clear-data";
+import generateAdDisclosureData from "./utils/generate-ad-disclosure-data";
 import generateFilingPeriodData from "./utils/generate-filing-period-data";
 
 const AD_DISCLOSURE_MODEL_UID = "api::ad-disclosure.ad-disclosure";
@@ -35,6 +36,9 @@ export default {
 
       // Generate filing period data
       await generateFilingPeriodData(strapi);
+
+      // Generate ad disclosure data
+      await generateAdDisclosureData(strapi);
     }
 
     strapi.db.lifecycles.subscribe({
