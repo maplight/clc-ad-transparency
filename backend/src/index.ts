@@ -1,4 +1,5 @@
 import algoliaClient from "./utils/algolia-client";
+import clearData from "./utils/clear-data";
 
 const AD_DISCLOSURE_MODEL_UID = "api::ad-disclosure.ad-disclosure";
 const REPORT_MODEL_UID = "api::report.report";
@@ -23,7 +24,15 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap({ strapi }) {
+  async bootstrap({ strapi }) {
+    const shouldSeedDatabase =
+      process.env.STRAPI_SEED_DB_ON_BOOTSTRAP === "true";
+
+    if (shouldSeedDatabase) {
+      // Clear data before seeding
+      await clearData(strapi);
+    }
+
     strapi.db.lifecycles.subscribe({
       models: [REPORT_MODEL_UID],
 
