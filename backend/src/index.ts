@@ -39,6 +39,9 @@ export default {
 
       // Generate ad disclosure data
       await generateAdDisclosureData(strapi);
+
+      // Clear Algolia index
+      await adDisclosuresIndex.clearObjects();
     }
 
     strapi.db.lifecycles.subscribe({
