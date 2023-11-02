@@ -10,9 +10,15 @@ import {
 } from "@remix-run/react";
 import { Analytics } from "@vercel/analytics/react";
 import { type LinksFunction, json } from "@vercel/remix";
+import stylesheet from "./tailwind.css";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  ...(cssBundleHref
+    ? [
+        { rel: "stylesheet", href: cssBundleHref },
+        { rel: "stylesheet", href: stylesheet },
+      ]
+    : []),
 ];
 
 export const loader = async () => {
