@@ -2,13 +2,14 @@ import { renderToString } from "react-dom/server";
 import type { InstantSearchServerState } from "react-instantsearch";
 import { type LoaderFunction, type MetaFunction, json } from "@vercel/remix";
 import {
+  getServerState,
+  HierarchicalMenu,
+  Hits,
   InstantSearch,
   InstantSearchSSRProvider,
   Menu,
   RefinementList,
   SearchBox,
-  getServerState,
-  Hits,
 } from "react-instantsearch";
 import { useLoaderData } from "@remix-run/react";
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
@@ -56,6 +57,14 @@ const Search = ({ serverState, serverUrl }: SearchProps) => {
           attribute="createdBy"
           searchable
           sortBy={["count:desc", "name:asc", "isRefined:asc"]}
+        />
+        <h2>Candidate</h2>
+        <HierarchicalMenu attributes={["candidates.lvl0", "candidates.lvl1"]} />
+        <h2>Measure</h2>
+        <HierarchicalMenu attributes={["measures.lvl0", "measures.lvl1"]} />
+        <h2>Party</h2>
+        <HierarchicalMenu
+          attributes={["politicalParties.lvl0", "politicalParties.lvl1"]}
         />
         <Hits />
       </InstantSearch>
