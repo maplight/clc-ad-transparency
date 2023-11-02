@@ -4,6 +4,35 @@ import type { Attribute } from "@strapi/strapi";
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 type User = Attribute.GetValues<"admin::user">;
 
+const generateRandomCandidateMeasureOrPoliticalParty = () => {
+  const components = [
+    "ad-disclosure.candidate",
+    "ad-disclosure.measure",
+    "ad-disclosure.political-party",
+  ];
+
+  const names = {
+    "ad-disclosure.candidate": ["Candidate 1", "Candidate 2", "Candidate 3"],
+    "ad-disclosure.measure": ["Measure 1", "Measure 2", "Measure 3"],
+    "ad-disclosure.political-party": [
+      "Party 1",
+      "Party 2",
+      "Party 3",
+      "Party 4",
+    ],
+  };
+
+  const stances = ["Supports", "Opposes", "Neither"];
+
+  const __component = faker.helpers.arrayElement(components);
+
+  return {
+    __component,
+    name: faker.helpers.arrayElement(names[__component]),
+    stance: faker.helpers.arrayElement(stances),
+  };
+};
+
 const generateRandomAdDisclosure = (userId: User["id"]) => {
   const startDate = faker.date.between({
     from: "2023-01-01",
@@ -25,17 +54,14 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
     adSpend: faker.number.int({ max: 1000000, min: 1000 }),
     adTextContent: faker.lorem.paragraph(5),
     authorizedAdSpend: faker.number.int({ max: 1000000, min: 1000 }),
-    candidatesMeasuresAndPoliticalParties: [
-      {
-        __component: "ad-disclosure.candidate",
-        name: faker.helpers.arrayElement([
-          "Candidate 1",
-          "Candidate 2",
-          "Candidate 3",
-        ]),
-        stance: faker.helpers.arrayElement(["Supports", "Opposes", "Neither"]),
-      },
-    ] as AdDisclosure["candidatesMeasuresAndPoliticalParties"],
+    candidatesMeasuresAndPoliticalParties: faker.helpers.arrayElements(
+      [
+        generateRandomCandidateMeasureOrPoliticalParty(),
+        generateRandomCandidateMeasureOrPoliticalParty(),
+        generateRandomCandidateMeasureOrPoliticalParty(),
+      ],
+      { min: 1, max: 3 }
+    ) as AdDisclosure["candidatesMeasuresAndPoliticalParties"],
     createdAt: Date.now().toString(),
     updatedAt: Date.now().toString(),
     createdBy: userId,
