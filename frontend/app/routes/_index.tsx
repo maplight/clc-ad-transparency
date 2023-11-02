@@ -5,6 +5,7 @@ import {
   InstantSearch,
   InstantSearchSSRProvider,
   Menu,
+  RefinementList,
   SearchBox,
   getServerState,
   Hits,
@@ -48,6 +49,12 @@ const Search = ({ serverState, serverUrl }: SearchProps) => {
         <h2>Format</h2>
         <MenuSelect
           attribute="adFormat"
+          sortBy={["count:desc", "name:asc", "isRefined:asc"]}
+        />
+        <h2>Filer</h2>
+        <RefinementList
+          attribute="createdBy"
+          searchable
           sortBy={["count:desc", "name:asc", "isRefined:asc"]}
         />
         <Hits />

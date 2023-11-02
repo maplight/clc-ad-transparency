@@ -14,6 +14,7 @@ adDisclosuresIndex.setSettings({
   attributesForFaceting: [
     "adElection",
     "adFormat",
+    "afterDistinct(searchable(createdBy))",
   ],
   searchableAttributes: ["adTextContent"],
 });
@@ -66,14 +67,20 @@ export default {
             filters: {
               id: reportAdDisclosureIds,
             },
+            populate: [
+              "createdBy",
+            ],
           }
         );
 
         const adDisclosureObjects = adDisclosures.map(
-          ({ id, ...adDisclosure }) => ({
-            objectID: id,
-            ...adDisclosure,
-          })
+          ({ id, ...adDisclosure }) => {
+            return {
+              objectID: id,
+              ...adDisclosure,
+              createdBy: `${adDisclosure.createdBy.firstname} ${adDisclosure.createdBy.lastname}`,
+            };
+          }
         );
 
         try {
