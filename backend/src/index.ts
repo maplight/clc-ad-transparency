@@ -17,6 +17,7 @@ adDisclosuresIndex.setSettings({
   attributesForFaceting: [
     "adElection",
     "adFormat",
+    "adSpend",
     "afterDistinct(searchable(createdBy))",
     "candidates.lvl0",
     "candidates.lvl1",

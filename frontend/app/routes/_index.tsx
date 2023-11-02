@@ -15,6 +15,7 @@ import { useLoaderData } from "@remix-run/react";
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
 import searchClient from "~/search-client";
 import MenuSelect from "~/components/MenuSelect";
+import NumericMenu from "~/components/NumericMenu";
 
 import "instantsearch.css/themes/satellite.css";
 
@@ -58,6 +59,17 @@ const Search = ({ serverState, serverUrl }: SearchProps) => {
           searchable
           sortBy={["count:desc", "name:asc", "isRefined:asc"]}
         />
+        <h2>Ad Spend</h2>
+        <NumericMenu
+          attribute="adSpend"
+          items={[
+            { label: "Any", start: 0 },
+            { label: "$1,000+", start: 1000 },
+            { label: "$10,000+", start: 10000 },
+            { label: "$100,000+", start: 100000 },
+            { label: "$1,000,000+", start: 1000000 },
+          ]}
+        />
         <h2>Candidate</h2>
         <HierarchicalMenu attributes={["candidates.lvl0", "candidates.lvl1"]} />
         <h2>Measure</h2>
@@ -98,6 +110,7 @@ export default function Index() {
   const { serverState, serverUrl } = useLoaderData() as SearchProps;
   return (
     <div>
+      <h1>Search for Ad Disclosures</h1>
       <Search serverState={serverState} serverUrl={serverUrl} />
     </div>
   );
