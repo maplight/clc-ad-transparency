@@ -93,6 +93,12 @@ Transfer the production database into your local dev environment, replacing `PRO
 
 When prompted, copy and paste the Production Transfer Token from 1Password.
 
+### Seeding the Database
+
+The Strapi `bootstrap` lifecycle is configured to seed the database when the environment variable `STRAPI_SEED_DB_ON_BOOTSTRAP` is set to `true`. When this environment variable is set, the database will be seeded with 50 `adDisclosures` for each filer user present in the current instance of the system. While creating `adDisclosures`, the process will also upload media files for each user and attach them to the `adDisclosure`. Media files in the `public/ad-disclosure-media` directory will be split among the number of filer users in the current instance so that we can ensure unique media between users.
+
+**Note:** This is a destructive action that cannot be reversed. Before seeding, the database will be cleared of all `adDisclosures`, `filingPeriods`, `reports`, and assets. Care should also be taken when running in development with the `--watch-admin` flag, as every restart of the server will cause the database to be reseeded.
+
 ## Algolia
 
 The following environment variables are required to [initialize the Algolia search client](https://www.algolia.com/doc/api-client/getting-started/initialize/javascript/?client=javascript):
