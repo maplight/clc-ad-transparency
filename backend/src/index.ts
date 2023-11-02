@@ -10,6 +10,13 @@ const adDisclosuresIndex = algoliaClient.initIndex(
   `ad_disclosures_${process.env.NODE_ENV}`
 );
 
+adDisclosuresIndex.setSettings({
+  attributesForFaceting: [
+    "adElection",
+    "adFormat",
+  ],
+  searchableAttributes: ["adTextContent"],
+});
 export default {
   /**
    * An asynchronous register function that runs before

@@ -4,6 +4,7 @@ import { type LoaderFunction, type MetaFunction, json } from "@vercel/remix";
 import {
   InstantSearch,
   InstantSearchSSRProvider,
+  Menu,
   SearchBox,
   getServerState,
   Hits,
@@ -11,6 +12,7 @@ import {
 import { useLoaderData } from "@remix-run/react";
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
 import searchClient from "~/search-client";
+import MenuSelect from "~/components/MenuSelect";
 
 import "instantsearch.css/themes/satellite.css";
 
@@ -38,6 +40,16 @@ const Search = ({ serverState, serverUrl }: SearchProps) => {
         }}
       >
         <SearchBox />
+        <h2>Election</h2>
+        <Menu
+          attribute="adElection"
+          sortBy={["count:desc", "name:asc", "isRefined:asc"]}
+        />
+        <h2>Format</h2>
+        <MenuSelect
+          attribute="adFormat"
+          sortBy={["count:desc", "name:asc", "isRefined:asc"]}
+        />
         <Hits />
       </InstantSearch>
     </InstantSearchSSRProvider>
