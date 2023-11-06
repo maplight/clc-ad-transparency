@@ -7,30 +7,29 @@ import mime from "mime/lite";
 
 type User = Attribute.GetValues<"admin::user">;
 
-const uploadAdDisclosureMedia = async (
-  strapi: Strapi,
-  currentUser: User,
-  users: User[]
-) => {
-  const adDisclosureMediaFilenames = readdirSync(
-    join(__dirname, "../../../public/ad-disclosure-media")
-  );
+const uploadAdDisclosureMedia = async (strapi: Strapi, currentUser: User) => {
+  // Get list of directories in public/ad-disclosure-media
+  const adDisclosureMediaDirectories = readdirSync(
+    join(__dirname, "../../../public/ad-disclosure-media"),
+    { withFileTypes: true }
+  ).filter((dirent) => dirent.isDirectory());
 
-  // Split media files evenly between users
-  const userIndex = users.findIndex(({ id }) => id === currentUser.id);
-  const userMediaFileCount = Math.ceil(
-    adDisclosureMediaFilenames.length / users.length
-  );
-  const userMediaFileStartIndex = userIndex * userMediaFileCount;
-  const userMediaFileEndIndex = userMediaFileStartIndex + userMediaFileCount;
-  const userMediaFilenames = adDisclosureMediaFilenames.slice(
-    userMediaFileStartIndex,
-    userMediaFileEndIndex
+  const randomAdDisclosureMediaDirectory = faker.helpers.arrayElement(
+    adDisclosureMediaDirectories
+  ).name;
+
+  // Get list of media files in a random directory
+  const adDisclosureMediaFilenames = readdirSync(
+    join(
+      __dirname,
+      "../../../public/ad-disclosure-media",
+      randomAdDisclosureMediaDirectory
+    )
   );
 
   const mediaUploads = [];
 
-  for (const filename of userMediaFilenames) {
+  for (const filename of adDisclosureMediaFilenames) {
     const mediaUpload = uploadFile(
       strapi,
       {
@@ -43,6 +42,7 @@ const uploadAdDisclosureMedia = async (
           path: join(
             __dirname,
             "../../../public/ad-disclosure-media",
+            randomAdDisclosureMediaDirectory,
             filename
           ),
           name: `${faker.string.uuid()}--${filename}`,

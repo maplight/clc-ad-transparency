@@ -14,6 +14,7 @@ const generateAdDisclosureData = async (strapi: Strapi) => {
   // Query for all Filer users
   const users = await strapi.entityService.findMany("admin::user", {
     filters: {
+      isActive: true,
       roles: {
         code: {
           $eq: "strapi-author",
@@ -34,8 +35,7 @@ const generateAdDisclosureData = async (strapi: Strapi) => {
   for (const user of users) {
     const uploadedAdDisclosureMediaFiles = await uploadAdDisclosureMedia(
       strapi,
-      user,
-      users
+      user
     );
 
     const bulkAdDisclosurePromises = [];
