@@ -12,6 +12,9 @@ const SearchFilters = () => {
             <Card title="Election">
               <Menu
                 attribute="adElection"
+                classNames={{
+                  selectedItem: "font-black text-primary-500",
+                }}
                 sortBy={["count:desc", "name:asc", "isRefined:asc"]}
               />
             </Card>
@@ -51,6 +54,9 @@ const SearchFilters = () => {
             <Card title="Candidate">
               <HierarchicalMenu
                 attributes={["candidates.lvl0", "candidates.lvl1"]}
+                classNames={{
+                  selectedItem: "font-black text-primary-500",
+                }}
               />
             </Card>
           </li>
@@ -58,6 +64,9 @@ const SearchFilters = () => {
             <Card title="Measure">
               <HierarchicalMenu
                 attributes={["measures.lvl0", "measures.lvl1"]}
+                classNames={{
+                  selectedItem: "font-black text-primary-500",
+                }}
               />
             </Card>
           </li>
@@ -65,6 +74,9 @@ const SearchFilters = () => {
             <Card title="Party">
               <HierarchicalMenu
                 attributes={["politicalParties.lvl0", "politicalParties.lvl1"]}
+                classNames={{
+                  selectedItem: "font-black text-primary-500",
+                }}
               />
             </Card>
           </li>
