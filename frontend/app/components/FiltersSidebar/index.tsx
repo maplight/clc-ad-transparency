@@ -1,3 +1,4 @@
+import { ClearRefinements } from "react-instantsearch";
 import SearchFilters from "./SearchFilters";
 import clcLogo from "~/images/clc-logo.png";
 
@@ -11,6 +12,18 @@ const FiltersSidebar = () => {
         <div className="flex flex-1 flex-col">
           <h2 className="text-xl font-bold text-white mb-3">Search Filters</h2>
           <SearchFilters />
+          <ClearRefinements
+            classNames={{
+              root: "mt-4",
+              button:
+                "bg-none hover:bg-none bg-primary-600 hover:bg-primary-500 text-white font-bold py-2 px-4 rounded",
+              disabledButton:
+                "bg-gray-400 text-white font-bold py-2 px-4 rounded",
+            }}
+            translations={{
+              resetButtonText: "Reset Filters",
+            }}
+          />
         </div>
       </div>
     </div>
