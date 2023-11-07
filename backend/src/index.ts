@@ -2,6 +2,9 @@ import algoliaClient from "./utils/algolia-client";
 import clearData from "./utils/clear-data";
 import generateAdDisclosureData from "./utils/generate-ad-disclosure-data";
 import generateFilingPeriodData from "./utils/generate-filing-period-data";
+import type { Attribute } from "@strapi/strapi";
+
+type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 
 const AD_DISCLOSURE_MODEL_UID = "api::ad-disclosure.ad-disclosure";
 const REPORT_MODEL_UID = "api::report.report";
@@ -9,6 +12,40 @@ const REPORT_MODEL_UID = "api::report.report";
 const adDisclosuresIndex = algoliaClient.initIndex(
   `ad_disclosures_${process.env.NODE_ENV}`
 );
+
+adDisclosuresIndex.setSettings({
+  attributesForFaceting: [
+    "adElection",
+    "adFormat",
+    "adSpend",
+    "afterDistinct(searchable(createdBy))",
+    "candidates.lvl0",
+    "candidates.lvl1",
+    "measures.lvl0",
+    "measures.lvl1",
+    "politicalParties.lvl0",
+    "politicalParties.lvl1",
+  ],
+  searchableAttributes: ["adTextContent"],
+});
+
+const getValuesByComponent = (
+  candidatesMeasuresAndPoliticalParties: AdDisclosure["candidatesMeasuresAndPoliticalParties"],
+  component: AdDisclosure["candidatesMeasuresAndPoliticalParties"][number]["__component"]
+) =>
+  candidatesMeasuresAndPoliticalParties.filter(
+    ({ __component }) => __component === component
+  );
+
+const lvl0FacetValues = ({
+  name,
+}: AdDisclosure["candidatesMeasuresAndPoliticalParties"][number]) => name;
+
+const lvl1FacetValues = ({
+  name,
+  stance,
+}: AdDisclosure["candidatesMeasuresAndPoliticalParties"][number]) =>
+  `${name} > ${stance}`;
 
 export default {
   /**
@@ -59,14 +96,44 @@ export default {
             filters: {
               id: reportAdDisclosureIds,
             },
+            populate: [
+              "candidatesMeasuresAndPoliticalParties",
+              "createdBy",
+            ],
           }
         );
 
         const adDisclosureObjects = adDisclosures.map(
-          ({ id, ...adDisclosure }) => ({
-            objectID: id,
-            ...adDisclosure,
-          })
+          ({ id, ...adDisclosure }) => {
+            const { candidatesMeasuresAndPoliticalParties } = adDisclosure;
+
+            const candidates = getValuesByComponent(
+              candidatesMeasuresAndPoliticalParties,
+              "ad-disclosure.candidate"
+            );
+
+            const measures = getValuesByComponent(
+              candidatesMeasuresAndPoliticalParties,
+              "ad-disclosure.measure"
+            );
+
+            const politicalParties = getValuesByComponent(
+              candidatesMeasuresAndPoliticalParties,
+              "ad-disclosure.political-party"
+            );
+
+            return {
+              objectID: id,
+              ...adDisclosure,
+              "candidates.lvl0": candidates.map(lvl0FacetValues),
+              "candidates.lvl1": candidates.map(lvl1FacetValues),
+              "measures.lvl0": measures.map(lvl0FacetValues),
+              "measures.lvl1": measures.map(lvl1FacetValues),
+              "politicalParties.lvl0": politicalParties.map(lvl0FacetValues),
+              "politicalParties.lvl1": politicalParties.map(lvl1FacetValues),
+              createdBy: `${adDisclosure.createdBy.firstname} ${adDisclosure.createdBy.lastname}`,
+            };
+          }
         );
 
         try {
