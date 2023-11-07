@@ -21,8 +21,6 @@ const SearchBar = () => {
       <SearchBox
         classNames={{
           form: "flex flex-1 h-full w-full",
-          input:
-            "block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 ring-1 focus:ring-2 ring-primary-600 sm:text-sm ml-2",
           root: "flex flex-1 h-full w-full py-3",
         }}
         placeholder="Search..."
