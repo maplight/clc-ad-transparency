@@ -4,6 +4,7 @@ import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
+import ListViewInstructions from './components/Injected/list-view-instructions';
 
 const name = pluginPkg.strapi.name;
 
@@ -39,7 +40,12 @@ export default {
     app.registerPlugin(plugin);
   },
 
-  bootstrap(app: any) {},
+  bootstrap(app: any) {
+    app.injectContentManagerComponent('listView', 'actions', {
+      name: 'list-view-instructions',
+      Component: ListViewInstructions,
+    });
+  },
 
   async registerTrads(app: any) {
     const { locales } = app;
