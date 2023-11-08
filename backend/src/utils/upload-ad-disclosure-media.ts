@@ -30,24 +30,24 @@ const uploadAdDisclosureMedia = async (strapi: Strapi, currentUser: User) => {
   const mediaUploads = [];
 
   for (const filename of adDisclosureMediaFilenames) {
+    const hash = faker.string.uuid();
+    const mimeType = mime.getType(filename);
+    const ext = mime.getExtension(mimeType);
+
     const mediaUpload = uploadFile(
       strapi,
       {
-        data: {
-          refId: Date.now().toString(),
-          ref: "api::ad-disclosure.ad-disclosure",
-          field: "adMedia",
-        },
-        file: {
-          path: join(
-            __dirname,
-            "../../../public/ad-disclosure-media",
-            randomAdDisclosureMediaDirectory,
-            filename
-          ),
-          name: `${faker.string.uuid()}--${filename}`,
-          type: mime.getType(filename),
-        },
+        ext,
+        hash,
+        mime: mimeType,
+        name: `${hash}--${filename}`,
+        path: join(
+          __dirname,
+          "../../../public/ad-disclosure-media",
+          randomAdDisclosureMediaDirectory,
+          filename
+        ),
+        url: `/ad-disclosure-media/${randomAdDisclosureMediaDirectory}/${filename}`,
       },
       currentUser
     );
