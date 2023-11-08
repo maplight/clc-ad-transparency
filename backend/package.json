@@ -6,7 +6,7 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build && yarn build:plugin",
-    "build:plugin": "cd ./src/plugins/ad-disclosure-report && yarn build",
+    "build:plugin": "cd ./src/plugins/ad-disclosure-report && yarn build && cd ../../../src/plugins/instructions && yarn build",
     "strapi": "strapi",
     "postinstall": "patch-package"
   },
