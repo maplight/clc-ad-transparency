@@ -2,49 +2,33 @@ import { statSync } from "fs";
 import type { Attribute, Strapi } from "@strapi/strapi";
 
 type User = Attribute.GetValues<"admin::user">;
+type FileUpload = Attribute.GetValues<"plugin::upload.file">;
 
-type UploadFileData = {
-  ref: string;
-  refId: string;
-  field: string;
-};
-
-type UploadFileFile = {
-  name: string;
+type UploadFile = Pick<FileUpload, "ext" | "hash" | "mime" | "name" | "url"> & {
   path: string;
-  type: string;
 };
 
-type UploadFile = {
-  data: UploadFileData;
-  file: UploadFileFile;
-};
-
-const uploadFile = async (
-  strapi: Strapi,
-  { data, file }: UploadFile,
-  user: User
-) => {
-  const { refId, ref, field } = data;
-  const { name, path, type } = file;
+const uploadFile = async (strapi: Strapi, file: UploadFile, user: User) => {
+  const { ext, hash, mime, name, path, url } = file;
 
   const fileStat = statSync(path);
 
-  const [uploadedFile] = await strapi.plugins.upload.services.upload.upload(
+  const uploadedFile = await strapi.entityService.create(
+    "plugin::upload.file",
     {
       data: {
-        refId,
-        ref,
-        field,
-      },
-      files: {
-        path,
+        createdBy: user.id,
+        ext,
+        folderPath: "/",
+        hash,
+        mime,
         name,
-        type,
+        provider: "local",
         size: fileStat.size,
+        updatedBy: user.id,
+        url,
       },
-    },
-    { user }
+    }
   );
 
   return uploadedFile;
