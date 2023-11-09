@@ -1,9 +1,15 @@
-const ListViewInstructions = () => {
+import { useSelector } from "react-redux";
+import {
+    Portal,
+    Typography,
+} from '@strapi/design-system';
+
+const ListViewInstructions = ({ strapi }) => {
+    const apiID = useSelector((state : any) => state["content-manager_listView"].contentType.apiID);
     const headerElement = document.querySelector('[data-strapi-header="true"]');
-    const instructionElement = document.createElement('p');
-    instructionElement.appendChild(document.createTextNode('hello here are instructions'));
-    headerElement?.appendChild(instructionElement);
-    return <></>;
+    return <Portal container = { headerElement }>
+        <Typography>hello here are instructions for { apiID } </Typography>
+    </Portal>;
 };
   
 export default ListViewInstructions;
