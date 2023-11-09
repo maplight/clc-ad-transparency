@@ -6,12 +6,25 @@
 
 import React from 'react';
 import pluginId from '../../pluginId';
+import {
+  BaseHeaderLayout,
+  ContentLayout
+} from '@strapi/design-system'
 
 const HomePage = () => {
   return (
     <div>
-      <h1>{pluginId}&apos;s HomePage</h1>
-      <p>Happy coding</p>
+      <BaseHeaderLayout
+        title="Instructions"
+        subtitle="How to use the CLC Ad Database"
+        as="h2"
+      />
+      <ContentLayout>
+        <ol>
+          <li>Add ad disclosures</li>
+          <li>File them</li>
+        </ol>
+      </ContentLayout>
     </div>
   );
 };
