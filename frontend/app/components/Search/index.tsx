@@ -9,6 +9,7 @@ import searchClient from "~/search-client";
 import type { ReactElement } from "react";
 import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
+import { HeaderSpacer } from "../Layout/Header";
 
 type Props = {
   serverState?: InstantSearchServerState;
@@ -35,6 +36,7 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
       >
         <FiltersSidebar />
         <div className="lg:pl-72">
+          <HeaderSpacer />
           <SearchBar />
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">

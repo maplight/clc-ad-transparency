@@ -2,6 +2,7 @@ import { renderToString } from "react-dom/server";
 import { type LoaderFunction, type MetaFunction, json } from "@vercel/remix";
 import { getServerState } from "react-instantsearch";
 import { useLoaderData } from "@remix-run/react";
+import Layout from "~/components/Layout";
 import Search, { type SearchProps } from "~/components/Search";
 
 import "instantsearch.css/themes/satellite.css";
@@ -30,5 +31,9 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const { serverState, serverUrl } = useLoaderData() as SearchProps;
-  return <Search serverState={serverState} serverUrl={serverUrl} />;
+  return (
+    <Layout>
+      <Search serverState={serverState} serverUrl={serverUrl} />
+    </Layout>
+  );
 }
