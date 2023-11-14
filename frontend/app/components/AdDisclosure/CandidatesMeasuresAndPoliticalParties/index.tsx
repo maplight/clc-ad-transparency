@@ -51,7 +51,7 @@ const CandidatesMeasuresAndPoliticalParties = ({
     <div>
       <h3 className="block text-sm font-medium text-gray-700 mt-8">{title}</h3>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {lvl1.map((item: string) => {
+        {lvl1.map((item: string, index: number) => {
           // The `item` will be in the format of "candidate | measure | party > position"
           const labelAndPosition = item.split(" > ");
 
@@ -59,7 +59,7 @@ const CandidatesMeasuresAndPoliticalParties = ({
           const position = labelAndPosition[1];
 
           return (
-            <div className="mt-2 flex items-center">
+            <div key={index} className="mt-2 flex items-center">
               {getPositionIcon(position as Position)}
               <p className="ml-2 text-sm text-gray-500">
                 {getPosition(position as Position)} {label}
