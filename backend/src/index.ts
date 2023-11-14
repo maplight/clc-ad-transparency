@@ -20,7 +20,7 @@ adDisclosuresIndex.setSettings({
     "adElection",
     "adFormat",
     "adSpend",
-    "afterDistinct(searchable(createdBy))",
+    "afterDistinct(searchable(filerName))",
     "candidates.lvl0",
     "candidates.lvl1",
     "measures.lvl0",
@@ -87,7 +87,7 @@ export default {
       models: [REPORT_MODEL_UID],
 
       async afterCreate(event) {
-        const { adDisclosures: reportAdDisclosures } = event.result;
+        const { adDisclosures: reportAdDisclosures, createdBy } = event.result;
         const reportAdDisclosureIds = JSON.parse(reportAdDisclosures).map(
           ({ id }) => id
         );
@@ -103,6 +103,17 @@ export default {
               "candidatesMeasuresAndPoliticalParties",
               "createdBy",
             ],
+          }
+        );
+
+        const registration = await strapi.entityService.findMany(
+          REGISTRATION_MODEL_UID,
+          {
+            filters: {
+              createdBy: {
+                id: createdBy.id,
+              },
+            },
           }
         );
 
@@ -134,7 +145,7 @@ export default {
               "measures.lvl1": measures.map(lvl1FacetValues),
               "politicalParties.lvl0": politicalParties.map(lvl0FacetValues),
               "politicalParties.lvl1": politicalParties.map(lvl1FacetValues),
-              createdBy: `${adDisclosure.createdBy.firstname} ${adDisclosure.createdBy.lastname}`,
+              filerName: registration.filerName,
             };
           }
         );
