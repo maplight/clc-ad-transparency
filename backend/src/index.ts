@@ -3,10 +3,12 @@ import clearData from "./utils/clear-data";
 import generateAdDisclosureData from "./utils/generate-ad-disclosure-data";
 import generateFilingPeriodData from "./utils/generate-filing-period-data";
 import type { Attribute } from "@strapi/strapi";
+import { errors } from "@strapi/utils";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 
 const AD_DISCLOSURE_MODEL_UID = "api::ad-disclosure.ad-disclosure";
+const REGISTRATION_MODEL_UID = "api::registration.registration";
 const REPORT_MODEL_UID = "api::report.report";
 
 const adDisclosuresIndex = algoliaClient.initIndex(
@@ -141,6 +143,31 @@ export default {
           await adDisclosuresIndex.saveObjects(adDisclosureObjects);
         } catch (error) {
           console.error("Error saving ad disclosures to Algolia", error);
+        }
+      },
+    });
+
+    strapi.db.lifecycles.subscribe({
+      models: [REPORT_MODEL_UID],
+
+      async beforeCreate(event) {
+        const { createdBy: createdById } = event.params.data;
+
+        const registration = await strapi.entityService.findMany(
+          REGISTRATION_MODEL_UID,
+          {
+            filters: {
+              createdBy: {
+                id: createdById,
+              },
+            },
+          }
+        );
+
+        if (!registration?.filerName) {
+          throw new errors.ApplicationError(
+            "A registered filer name is required to file a report. Please update your registration details."
+          );
         }
       },
     });
