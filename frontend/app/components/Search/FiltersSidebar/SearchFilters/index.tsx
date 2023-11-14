@@ -11,7 +11,8 @@ const SearchFilters = () => {
           <Menu
             attribute="adElection"
             classNames={{
-              selectedItem: "font-black text-primary-500",
+              count: "text-sm text-gray-500",
+              selectedItem: "font-medium text-primary-500",
             }}
             sortBy={["count:desc", "name:asc", "isRefined:asc"]}
           />
@@ -29,6 +30,10 @@ const SearchFilters = () => {
         <Card title="Filer">
           <RefinementList
             attribute="createdBy"
+            classNames={{
+              checkbox: "text-primary-500 focus:ring-primary-500 rounded",
+              selectedItem: "font-medium text-primary-500",
+            }}
             searchable
             sortBy={["count:desc", "name:asc", "isRefined:asc"]}
           />
@@ -53,7 +58,7 @@ const SearchFilters = () => {
           <HierarchicalMenu
             attributes={["candidates.lvl0", "candidates.lvl1"]}
             classNames={{
-              selectedItem: "font-black text-primary-500",
+              selectedItem: "font-medium text-primary-500",
             }}
           />
         </Card>
@@ -63,7 +68,7 @@ const SearchFilters = () => {
           <HierarchicalMenu
             attributes={["measures.lvl0", "measures.lvl1"]}
             classNames={{
-              selectedItem: "font-black text-primary-500",
+              selectedItem: "font-medium text-primary-500",
             }}
           />
         </Card>
@@ -73,7 +78,7 @@ const SearchFilters = () => {
           <HierarchicalMenu
             attributes={["politicalParties.lvl0", "politicalParties.lvl1"]}
             classNames={{
-              selectedItem: "font-black text-primary-500",
+              selectedItem: "font-medium text-primary-500",
             }}
           />
         </Card>
