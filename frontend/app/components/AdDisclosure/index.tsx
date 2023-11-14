@@ -88,13 +88,7 @@ const AdDisclosure = ({ hit }: Props): ReactElement => {
             {/* Ad Disclosure searchable text content */}
             <div className="mt-4 space-y-6">
               <p className="text-base text-gray-500">
-                <Highlight
-                  attribute="adTextContent"
-                  classNames={{
-                    highlighted: "bg-primary-100 text-primary-600",
-                  }}
-                  hit={hit}
-                />
+                <Highlight attribute="adTextContent" hit={hit} />
               </p>
             </div>
 
