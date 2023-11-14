@@ -1,77 +1,20 @@
-diff --git a/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js b/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
-index c259beb..6fd4f9d 100644
---- a/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
-+++ b/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
-@@ -80,7 +80,7 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
-     await post('/admin/logout');
-     auth.clearAppStorage();
-     handleToggleUserLinks();
--    history.push('/auth/login');
-+    history.push('/content-manager');
-   };
- 
-   const handleBlur = (e) => {
-@@ -105,6 +105,7 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
-     <MainNav condensed={condensed}>
-       <NavBrand
-         as={RouterNavLink}
-+        to="/content-manager"
-         workplace={formatMessage({
-           id: 'app.components.LeftMenu.navbrand.workplace',
-           defaultMessage: 'Workplace',
 diff --git a/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js b/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js
-index 9e6f8a7..befec42 100644
+index befec42..9e6f8a7 100644
 --- a/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js
 +++ b/node_modules/@strapi/admin/admin/src/content-manager/pages/App/LeftMenu/index.js
-@@ -50,15 +50,6 @@ const LeftMenu = () => {
+@@ -50,6 +50,15 @@ const LeftMenu = () => {
            searchable: true,
            links: collectionTypeLinks,
          },
--        {
--          id: 'singleTypes',
--          title: {
--            id: getTrad('components.LeftMenu.single-types'),
--            defaultMessage: 'Single Types',
--          },
--          searchable: true,
--          links: singleTypeLinks,
--        },
++        {
++          id: 'singleTypes',
++          title: {
++            id: getTrad('components.LeftMenu.single-types'),
++            defaultMessage: 'Single Types',
++          },
++          searchable: true,
++          links: singleTypeLinks,
++        },
        ].map((section) => ({
          ...section,
          links: section.links
-diff --git a/node_modules/@strapi/admin/admin/src/pages/AuthPage/index.js b/node_modules/@strapi/admin/admin/src/pages/AuthPage/index.js
-index 0f3c656..f7d1358 100644
---- a/node_modules/@strapi/admin/admin/src/pages/AuthPage/index.js
-+++ b/node_modules/@strapi/admin/admin/src/pages/AuthPage/index.js
-@@ -228,7 +228,7 @@ const AuthPage = ({ hasAdmin, setHasAdmin }) => {
-       auth.setUserInfo(user, false);
- 
-       // Redirect to the homePage
--      push('/');
-+      push('/content-manager');
-     } catch (err) {
-       if (err.response) {
-         const errorMessage = get(err, ['response', 'data', 'message'], 'Something went wrong');
-@@ -249,11 +249,11 @@ const AuthPage = ({ hasAdmin, setHasAdmin }) => {
-   const redirectToPreviousLocation = () => {
-     if (authType === 'login') {
-       const redirectTo = query.get('redirectTo');
--      const redirectUrl = redirectTo ? decodeURIComponent(redirectTo) : '/';
-+      const redirectUrl = redirectTo ? decodeURIComponent(redirectTo) : '/content-manager';
- 
-       push(redirectUrl);
-     } else {
--      push('/');
-+      push('/content-manager');
-     }
-   };
- 
-@@ -262,7 +262,7 @@ const AuthPage = ({ hasAdmin, setHasAdmin }) => {
-   // there is already an admin user oo
-   // the user is already logged in
-   if (!forms[authType] || (hasAdmin && authType === 'register-admin') || auth.getToken()) {
--    return <Redirect to="/" />;
-+    return <Redirect to="/content-manager" />;
-   }
- 
-   // Redirect the user to the register-admin if it is the first user
