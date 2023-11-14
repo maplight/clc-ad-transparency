@@ -58,6 +58,7 @@ const SearchFilters = () => {
           <HierarchicalMenu
             attributes={["candidates.lvl0", "candidates.lvl1"]}
             classNames={{
+              item: "font-normal text-gray-900",
               selectedItem: "font-medium text-primary-500",
             }}
           />
@@ -68,6 +69,7 @@ const SearchFilters = () => {
           <HierarchicalMenu
             attributes={["measures.lvl0", "measures.lvl1"]}
             classNames={{
+              item: "font-normal text-gray-900",
               selectedItem: "font-medium text-primary-500",
             }}
           />
@@ -78,6 +80,7 @@ const SearchFilters = () => {
           <HierarchicalMenu
             attributes={["politicalParties.lvl0", "politicalParties.lvl1"]}
             classNames={{
+              item: "font-normal text-gray-900",
               selectedItem: "font-medium text-primary-500",
             }}
           />
