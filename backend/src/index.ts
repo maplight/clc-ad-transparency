@@ -97,6 +97,7 @@ export default {
               id: reportAdDisclosureIds,
             },
             populate: [
+              "adMedia",
               "candidatesMeasuresAndPoliticalParties",
               "createdBy",
             ],

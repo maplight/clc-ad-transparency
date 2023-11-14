@@ -10,6 +10,7 @@ import type { ReactElement } from "react";
 import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
 import { HeaderSpacer } from "../Layout/Header";
+import AdDisclosure from "~/components/AdDisclosure";
 
 type Props = {
   serverState?: InstantSearchServerState;
@@ -38,9 +39,15 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
         <div className="lg:pl-72">
           <HeaderSpacer />
           <SearchBar />
-          <main className="py-10">
+          <main className="py-10 bg-slate-100">
             <div className="px-4 sm:px-6 lg:px-8">
-              <Hits />
+              <Hits
+                classNames={{
+                  item: "rounded shadow-medium",
+                  list: "flex flex-col gap-y-4 items-center",
+                }}
+                hitComponent={AdDisclosure}
+              />
             </div>
           </main>
         </div>
