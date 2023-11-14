@@ -36,10 +36,10 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
         }}
       >
         <FiltersSidebar />
-        <div className="lg:pl-72">
+        <div className="lg:pl-72 h-full">
           <HeaderSpacer />
           <SearchBar />
-          <main className="py-10 bg-slate-100">
+          <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
               <Hits
                 classNames={{
