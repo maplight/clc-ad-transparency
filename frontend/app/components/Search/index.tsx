@@ -7,8 +7,8 @@ import {
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
 import searchClient from "~/search-client";
 import type { ReactElement } from "react";
-import SearchBar from "../SearchBar";
-import FiltersSidebar from "../FiltersSidebar";
+import SearchBar from "./SearchBar";
+import FiltersSidebar from "./FiltersSidebar";
 
 type Props = {
   serverState?: InstantSearchServerState;
