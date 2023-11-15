@@ -32,7 +32,7 @@ const AdDisclosure = ({ hit }: Props): ReactElement => {
 
           <div className="mt-4">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              {hit.createdBy}
+              {hit.filerName}
             </h1>
           </div>
 

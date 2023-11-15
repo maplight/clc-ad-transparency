@@ -8,6 +8,7 @@ const clearData = async (strapi: Strapi) => {
   const collectionTypeUids = [
     "api::ad-disclosure.ad-disclosure",
     "api::filing-period.filing-period",
+    "api::registration.registration",
     "api::report.report",
     "plugin::upload.file",
   ] as ContentTypeUid[];

@@ -3,10 +3,12 @@ import clearData from "./utils/clear-data";
 import generateAdDisclosureData from "./utils/generate-ad-disclosure-data";
 import generateFilingPeriodData from "./utils/generate-filing-period-data";
 import type { Attribute } from "@strapi/strapi";
+import { errors } from "@strapi/utils";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 
 const AD_DISCLOSURE_MODEL_UID = "api::ad-disclosure.ad-disclosure";
+const REGISTRATION_MODEL_UID = "api::registration.registration";
 const REPORT_MODEL_UID = "api::report.report";
 
 const adDisclosuresIndex = algoliaClient.initIndex(
@@ -18,7 +20,7 @@ adDisclosuresIndex.setSettings({
     "adElection",
     "adFormat",
     "adSpend",
-    "afterDistinct(searchable(createdBy))",
+    "afterDistinct(searchable(filerName))",
     "candidates.lvl0",
     "candidates.lvl1",
     "measures.lvl0",
@@ -85,7 +87,7 @@ export default {
       models: [REPORT_MODEL_UID],
 
       async afterCreate(event) {
-        const { adDisclosures: reportAdDisclosures } = event.result;
+        const { adDisclosures: reportAdDisclosures, createdBy } = event.result;
         const reportAdDisclosureIds = JSON.parse(reportAdDisclosures).map(
           ({ id }) => id
         );
@@ -101,6 +103,17 @@ export default {
               "candidatesMeasuresAndPoliticalParties",
               "createdBy",
             ],
+          }
+        );
+
+        const registration = await strapi.entityService.findMany(
+          REGISTRATION_MODEL_UID,
+          {
+            filters: {
+              createdBy: {
+                id: createdBy.id,
+              },
+            },
           }
         );
 
@@ -132,7 +145,7 @@ export default {
               "measures.lvl1": measures.map(lvl1FacetValues),
               "politicalParties.lvl0": politicalParties.map(lvl0FacetValues),
               "politicalParties.lvl1": politicalParties.map(lvl1FacetValues),
-              createdBy: `${adDisclosure.createdBy.firstname} ${adDisclosure.createdBy.lastname}`,
+              filerName: registration.filerName,
             };
           }
         );
@@ -141,6 +154,31 @@ export default {
           await adDisclosuresIndex.saveObjects(adDisclosureObjects);
         } catch (error) {
           console.error("Error saving ad disclosures to Algolia", error);
+        }
+      },
+    });
+
+    strapi.db.lifecycles.subscribe({
+      models: [REPORT_MODEL_UID],
+
+      async beforeCreate(event) {
+        const { createdBy: createdById } = event.params.data;
+
+        const registration = await strapi.entityService.findMany(
+          REGISTRATION_MODEL_UID,
+          {
+            filters: {
+              createdBy: {
+                id: createdById,
+              },
+            },
+          }
+        );
+
+        if (!registration?.filerName) {
+          throw new errors.ApplicationError(
+            "A registered filer name is required to file a report. Please update your registration details."
+          );
         }
       },
     });

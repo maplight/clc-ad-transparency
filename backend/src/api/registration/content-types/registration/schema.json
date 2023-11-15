@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "registrations",
+  "info": {
+    "singularName": "registration",
+    "pluralName": "registrations",
+    "displayName": "Registration"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "filerName": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

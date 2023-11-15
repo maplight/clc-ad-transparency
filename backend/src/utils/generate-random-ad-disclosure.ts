@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import type { Attribute } from "@strapi/strapi";
+import { candidateNames, measureNames, politicalPartyNames } from "./constants";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 type User = Attribute.GetValues<"admin::user">;
@@ -12,14 +13,9 @@ const generateRandomCandidateMeasureOrPoliticalParty = () => {
   ];
 
   const names = {
-    "ad-disclosure.candidate": ["Candidate 1", "Candidate 2", "Candidate 3"],
-    "ad-disclosure.measure": ["Measure 1", "Measure 2", "Measure 3"],
-    "ad-disclosure.political-party": [
-      "Party 1",
-      "Party 2",
-      "Party 3",
-      "Party 4",
-    ],
+    "ad-disclosure.candidate": candidateNames,
+    "ad-disclosure.measure": measureNames,
+    "ad-disclosure.political-party": politicalPartyNames,
   };
 
   const stances = ["Supports", "Opposes", "Neither"];
@@ -40,9 +36,12 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
   });
   return {
     adElection: faker.helpers.arrayElement([
-      "Election 1",
-      "Election 2",
-      "Election 3",
+      "U.S. President",
+      "U.S. Senate",
+      "U.S. Representative",
+      "State Senate",
+      "State Representative",
+      "Governor",
     ]) as AdDisclosure["adElection"],
     adFormat: faker.helpers.arrayElement([
       "Digital",
@@ -52,7 +51,7 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
       "Radio",
     ]) as AdDisclosure["adFormat"],
     adSpend: faker.number.int({ max: 1000000, min: 1000 }),
-    adTextContent: faker.lorem.paragraph(5),
+    adTextContent: faker.word.words({ count: { min: 15, max: 30 } }),
     authorizedAdSpend: faker.number.int({ max: 1000000, min: 1000 }),
     candidatesMeasuresAndPoliticalParties: faker.helpers.arrayElements(
       [
@@ -62,15 +61,26 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
       ],
       { min: 1, max: 3 }
     ) as AdDisclosure["candidatesMeasuresAndPoliticalParties"],
-    createdAt: Date.now().toString(),
-    updatedAt: Date.now().toString(),
-    createdBy: userId,
-    updatedBy: userId,
+    clickCount: faker.number.int({ max: 10000, min: 100 }),
     endDate: faker.date.between({
       from: startDate,
       to: "2023-12-31",
     }),
+    externalLink: faker.internet.url(),
     startDate,
+    targetAudience: faker.helpers.arrayElement([
+      "Registered Voters",
+      "Unregistered Voters",
+      "Voters",
+      "Non-Voters",
+      "Voters in District 1",
+      "Voters in District 2",
+    ]),
+    viewCount: faker.number.int({ max: 100000, min: 1000 }),
+    createdAt: Date.now().toString(),
+    updatedAt: Date.now().toString(),
+    createdBy: userId,
+    updatedBy: userId,
   };
 };
 

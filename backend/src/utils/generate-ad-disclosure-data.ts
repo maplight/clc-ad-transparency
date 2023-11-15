@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import type { Strapi } from "@strapi/strapi";
 import uploadAdDisclosureMedia from "./upload-ad-disclosure-media";
 import generateRandomAdDisclosure from "./generate-random-ad-disclosure";
+import { filerNames } from "./constants";
 
 const AD_DISCLOSURE_SEED_COUNT = 50;
 
@@ -37,6 +38,17 @@ const generateAdDisclosureData = async (strapi: Strapi) => {
       strapi,
       user
     );
+
+    await strapi.entityService.create("api::registration.registration", {
+      data: {
+        createdBy: user.id,
+        updatedBy: user.id,
+        filerName: faker.helpers.arrayElement([
+          faker.person.fullName(),
+          ...filerNames,
+        ]),
+      },
+    });
 
     const bulkAdDisclosurePromises = [];
     const randomAdDisclosuresData = new Array(AD_DISCLOSURE_SEED_COUNT)

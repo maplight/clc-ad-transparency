@@ -2,9 +2,12 @@
   "attributes": {
     "adElection": {
       "enum": [
-        "Election 1",
-        "Election 2",
-        "Election 3"
+        "U.S. President",
+        "U.S. Senate",
+        "U.S. Representative",
+        "State Senate",
+        "State Representative",
+        "Governor"
       ],
       "required": true,
       "type": "enumeration"

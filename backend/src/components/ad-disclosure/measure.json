@@ -1,31 +1,36 @@
 {
-  "collectionName": "components_ad_disclosure_measures",
-  "info": {
-    "displayName": "Measure",
-    "icon": "file",
-    "description": ""
-  },
-  "options": {},
   "attributes": {
     "name": {
-      "type": "enumeration",
       "enum": [
-        "Measure 1",
-        "Measure 2",
-        "Measure 3",
-        "Measure 4",
-        "Measure 5"
+        "Question 1",
+        "Question 2",
+        "Question 3",
+        "Question 4",
+        "Question 5",
+        "Question 6",
+        "Question 7",
+        "Question 8",
+        "Question 9",
+        "Question 10"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
     },
     "stance": {
-      "type": "enumeration",
       "enum": [
         "Supports",
         "Opposes",
         "Neither"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
     }
-  }
+  },
+  "collectionName": "components_ad_disclosure_measures",
+  "info": {
+    "description": "",
+    "displayName": "Measure",
+    "icon": "file"
+  },
+  "options": {}
 }

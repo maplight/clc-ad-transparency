@@ -540,7 +540,14 @@ export interface ApiAdDisclosureAdDisclosure extends Schema.CollectionType {
   };
   attributes: {
     adElection: Attribute.Enumeration<
-      ['Election 1', 'Election 2', 'Election 3']
+      [
+        'U.S. President',
+        'U.S. Senate',
+        'U.S. Representative',
+        'State Senate',
+        'State Representative',
+        'Governor'
+      ]
     > &
       Attribute.Required;
     adFormat: Attribute.Enumeration<
@@ -615,6 +622,35 @@ export interface ApiFilingPeriodFilingPeriod extends Schema.CollectionType {
   };
 }
 
+export interface ApiRegistrationRegistration extends Schema.SingleType {
+  collectionName: 'registrations';
+  info: {
+    singularName: 'registration';
+    pluralName: 'registrations';
+    displayName: 'Registration';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    filerName: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::registration.registration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::registration.registration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiReportReport extends Schema.CollectionType {
   collectionName: 'reports';
   info: {
@@ -666,6 +702,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::ad-disclosure.ad-disclosure': ApiAdDisclosureAdDisclosure;
       'api::filing-period.filing-period': ApiFilingPeriodFilingPeriod;
+      'api::registration.registration': ApiRegistrationRegistration;
       'api::report.report': ApiReportReport;
     }
   }

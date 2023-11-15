@@ -29,7 +29,7 @@ const SearchFilters = () => {
       <li>
         <Card title="Filer">
           <RefinementList
-            attribute="createdBy"
+            attribute="filerName"
             classNames={{
               checkbox: "text-primary-500 focus:ring-primary-500 rounded",
               selectedItem: "font-medium text-primary-500",
