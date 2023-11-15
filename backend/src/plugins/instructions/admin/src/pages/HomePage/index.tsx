@@ -3,15 +3,25 @@
  * HomePage
  *
  */
+//{ memo, useState, useEffect }
+import { useState, useEffect } from 'react';
+import { useFetchClient } from '@strapi/helper-plugin';
 
-import React from 'react';
-import pluginId from '../../pluginId';
 import {
   BaseHeaderLayout,
   ContentLayout
 } from '@strapi/design-system'
 
 const HomePage = () => {
+  const [instructions, setInstructions] = useState('loading instructions');
+  const { get } = useFetchClient();
+
+  useEffect(() => {
+    get('/instructions').then(res => {
+      setInstructions(res.data);
+    });
+  }, [setInstructions]);
+
   return (
     <div>
       <BaseHeaderLayout
@@ -20,10 +30,7 @@ const HomePage = () => {
         as="h2"
       />
       <ContentLayout>
-        <ol>
-          <li>Add ad disclosures</li>
-          <li>File them</li>
-        </ol>
+        { instructions }
       </ContentLayout>
     </div>
   );

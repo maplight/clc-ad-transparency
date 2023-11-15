@@ -1,5 +1,5 @@
-import myController from './my-controller';
+import instructionsController  from './instructions-controller';
 
 export default {
-  myController,
+  instructionsController,
 };

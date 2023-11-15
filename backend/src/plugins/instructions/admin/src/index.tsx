@@ -36,7 +36,28 @@ export default {
       isReady: false,
       name,
     };
-
+    app.createSettingSection(
+      {
+        id: pluginId,
+        intlLabel: {
+          id: `${pluginId}.plugin.name`,
+          defaultMessage: 'Instructions',
+        },
+      },
+      [
+        {
+          intlLabel: {
+            id: `${pluginId}.plugin.name`,
+            defaultMessage: 'Instruction Content',
+          },
+          id: 'settings',
+          to: `/settings/${pluginId}`,
+          Component: async () => {
+            return import('./pages/Settings');
+          },
+        },
+      ]
+    );
     app.registerPlugin(plugin);
   },
 

@@ -3,17 +3,27 @@ import {
     Portal,
     Typography,
 } from '@strapi/design-system';
+import { useState, useEffect} from 'react';
 
-const instructionMap = {
-    'ad-disclosure': 'Instructions for Ad Disclosures',
-    'filing-period': 'Instructions for filing period',
-    'report': 'Instructions for report',
-}
-const ListViewInstructions = ({ strapi }) => {
+import { instructionsConfig } from '../../../../server/services/instructionsConfig';
+import { useFetchClient } from '@strapi/helper-plugin';
+
+
+const ListViewInstructions = () => {
+    const [instructions, setInstructions] = useState('loading instructions');
+    const { get } = useFetchClient();
     const apiID = useSelector((state : any) => state["content-manager_listView"].contentType.apiID);
-    const headerElement = document.querySelector('[data-strapi-header="true"]');
+
+    useEffect(() => {
+      get(`/instructions?component=${apiID}`).then(res => {
+        setInstructions(res.data);
+      });
+    }, [setInstructions]);
+  
+    const headerElement = document.querySelector('[data-strapi-header="true"]');  
+
     return <Portal container = { headerElement }>
-        <Typography>{ instructionMap[apiID]}</Typography>
+        <Typography>{ instructions }</Typography>
     </Portal>;
 };
   
