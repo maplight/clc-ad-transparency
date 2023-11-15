@@ -540,7 +540,14 @@ export interface ApiAdDisclosureAdDisclosure extends Schema.CollectionType {
   };
   attributes: {
     adElection: Attribute.Enumeration<
-      ['Election 1', 'Election 2', 'Election 3']
+      [
+        'U.S. President',
+        'U.S. Senate',
+        'U.S. Representative',
+        'State Senate',
+        'State Representative',
+        'Governor'
+      ]
     > &
       Attribute.Required;
     adFormat: Attribute.Enumeration<

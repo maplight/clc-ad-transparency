@@ -1,29 +1,30 @@
 {
-  "collectionName": "components_ad_disclosure_political_parties",
-  "info": {
-    "displayName": "Political Party",
-    "icon": "bulletList"
-  },
-  "options": {},
   "attributes": {
     "name": {
-      "type": "enumeration",
       "enum": [
-        "Party 1",
-        "Party 2",
-        "Party 3",
-        "Party 4"
+        "Democratic Party",
+        "Republican Party",
+        "Green Party",
+        "Libertarian Party",
+        "Independent Party"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
     },
     "stance": {
-      "type": "enumeration",
       "enum": [
         "Supports",
         "Opposes",
         "Neither"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
     }
-  }
+  },
+  "collectionName": "components_ad_disclosure_political_parties",
+  "info": {
+    "displayName": "Political Party",
+    "icon": "bulletList"
+  },
+  "options": {}
 }

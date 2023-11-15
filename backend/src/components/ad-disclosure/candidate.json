@@ -1,28 +1,45 @@
 {
-  "collectionName": "components_ad_disclosure_candidates",
-  "info": {
-    "displayName": "Candidate",
-    "icon": "user"
-  },
-  "options": {},
   "attributes": {
     "name": {
-      "type": "enumeration",
       "enum": [
-        "Candidate 1",
-        "Candidate 2",
-        "Candidate 3"
+        "Tracy Kessler-Bechtelar",
+        "Dominic Kerluke",
+        "Neil Brown",
+        "Bessie Nitzsche",
+        "Sarah Homenick",
+        "Leonard Auer",
+        "Frankie Swift Jr.",
+        "Alyssa Nicolas DVM",
+        "Nora Fritsch V",
+        "Lindsey Mohr",
+        "Patty Sporer-Blick",
+        "Gilberto O'Kon-Schmitt",
+        "Bessie Hudson",
+        "Lionel Wehner IV",
+        "Hattie Schmidt",
+        "Nicolas Conn-Conn",
+        "Kellie Sipes",
+        "Roman Tremblay-Hegmann",
+        "Toni Herzog",
+        "Randolph Zieme"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
     },
     "stance": {
-      "type": "enumeration",
       "enum": [
         "Supports",
         "Opposes",
         "Neither"
       ],
-      "required": true
+      "required": true,
+      "type": "enumeration"
     }
-  }
+  },
+  "collectionName": "components_ad_disclosure_candidates",
+  "info": {
+    "displayName": "Candidate",
+    "icon": "user"
+  },
+  "options": {}
 }

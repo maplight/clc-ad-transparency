@@ -7,7 +7,30 @@ export interface AdDisclosureCandidate extends Schema.Component {
     icon: 'user';
   };
   attributes: {
-    name: Attribute.Enumeration<['Candidate 1', 'Candidate 2', 'Candidate 3']> &
+    name: Attribute.Enumeration<
+      [
+        'Tracy Kessler-Bechtelar',
+        'Dominic Kerluke',
+        'Neil Brown',
+        'Bessie Nitzsche',
+        'Sarah Homenick',
+        'Leonard Auer',
+        'Frankie Swift Jr.',
+        'Alyssa Nicolas DVM',
+        'Nora Fritsch V',
+        'Lindsey Mohr',
+        'Patty Sporer-Blick',
+        "Gilberto O'Kon-Schmitt",
+        'Bessie Hudson',
+        'Lionel Wehner IV',
+        'Hattie Schmidt',
+        'Nicolas Conn-Conn',
+        'Kellie Sipes',
+        'Roman Tremblay-Hegmann',
+        'Toni Herzog',
+        'Randolph Zieme'
+      ]
+    > &
       Attribute.Required;
     stance: Attribute.Enumeration<['Supports', 'Opposes', 'Neither']> &
       Attribute.Required;
@@ -17,13 +40,24 @@ export interface AdDisclosureCandidate extends Schema.Component {
 export interface AdDisclosureMeasure extends Schema.Component {
   collectionName: 'components_ad_disclosure_measures';
   info: {
+    description: '';
     displayName: 'Measure';
     icon: 'file';
-    description: '';
   };
   attributes: {
     name: Attribute.Enumeration<
-      ['Measure 1', 'Measure 2', 'Measure 3', 'Measure 4', 'Measure 5']
+      [
+        'Question 1',
+        'Question 2',
+        'Question 3',
+        'Question 4',
+        'Question 5',
+        'Question 6',
+        'Question 7',
+        'Question 8',
+        'Question 9',
+        'Question 10'
+      ]
     > &
       Attribute.Required;
     stance: Attribute.Enumeration<['Supports', 'Opposes', 'Neither']> &
@@ -38,7 +72,15 @@ export interface AdDisclosurePoliticalParty extends Schema.Component {
     icon: 'bulletList';
   };
   attributes: {
-    name: Attribute.Enumeration<['Party 1', 'Party 2', 'Party 3', 'Party 4']> &
+    name: Attribute.Enumeration<
+      [
+        'Democratic Party',
+        'Republican Party',
+        'Green Party',
+        'Libertarian Party',
+        'Independent Party'
+      ]
+    > &
       Attribute.Required;
     stance: Attribute.Enumeration<['Supports', 'Opposes', 'Neither']> &
       Attribute.Required;

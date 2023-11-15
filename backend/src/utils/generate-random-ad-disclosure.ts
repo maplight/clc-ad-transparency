@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import type { Attribute } from "@strapi/strapi";
+import { candidateNames, measureNames, politicalPartyNames } from "./constants";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 type User = Attribute.GetValues<"admin::user">;
@@ -12,14 +13,9 @@ const generateRandomCandidateMeasureOrPoliticalParty = () => {
   ];
 
   const names = {
-    "ad-disclosure.candidate": ["Candidate 1", "Candidate 2", "Candidate 3"],
-    "ad-disclosure.measure": ["Measure 1", "Measure 2", "Measure 3"],
-    "ad-disclosure.political-party": [
-      "Party 1",
-      "Party 2",
-      "Party 3",
-      "Party 4",
-    ],
+    "ad-disclosure.candidate": candidateNames,
+    "ad-disclosure.measure": measureNames,
+    "ad-disclosure.political-party": politicalPartyNames,
   };
 
   const stances = ["Supports", "Opposes", "Neither"];
