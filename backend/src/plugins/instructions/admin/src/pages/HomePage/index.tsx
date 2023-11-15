@@ -30,7 +30,9 @@ const HomePage = () => {
         as="h2"
       />
       <ContentLayout>
-        { instructions }
+        <div style={{whiteSpace : "pre-line"}}>
+          { instructions }
+        </div>
       </ContentLayout>
     </div>
   );
