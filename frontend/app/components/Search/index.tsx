@@ -7,6 +7,8 @@ import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
 import { HeaderSpacer } from "../Layout/Header";
 import AdDisclosureList from "~/components/AdDisclosureList";
+import AdDisclosureTable from "../AdDisclosureTable";
+import { useState } from "react";
 
 type Props = {
   serverState?: InstantSearchServerState;
@@ -14,6 +16,7 @@ type Props = {
 };
 
 const Search = ({ serverState, serverUrl }: Props): ReactElement => {
+  const [view, setView] = useState<"list" | "table">("table");
   return (
     <InstantSearchSSRProvider {...serverState}>
       <InstantSearch
@@ -34,10 +37,10 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
         <FiltersSidebar />
         <div className="lg:pl-72 h-full">
           <HeaderSpacer />
-          <SearchBar />
+          <SearchBar setView={setView} view={view} />
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
-              <AdDisclosureList />
+              {view === "table" ? <AdDisclosureTable /> : <AdDisclosureList />}
             </div>
           </main>
         </div>
