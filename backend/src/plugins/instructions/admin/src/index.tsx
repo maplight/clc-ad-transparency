@@ -55,6 +55,12 @@ export default {
           Component: async () => {
             return import('./pages/Settings');
           },
+          permissions: [
+            {
+              action: "plugin::instructions.update",
+              subject: null
+            }
+          ]
         },
       ]
     );
