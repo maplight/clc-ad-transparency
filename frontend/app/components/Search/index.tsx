@@ -1,16 +1,12 @@
 import type { InstantSearchServerState } from "react-instantsearch";
-import {
-  Hits,
-  InstantSearch,
-  InstantSearchSSRProvider,
-} from "react-instantsearch";
+import { InstantSearch, InstantSearchSSRProvider } from "react-instantsearch";
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
 import searchClient from "~/search-client";
 import type { ReactElement } from "react";
 import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
 import { HeaderSpacer } from "../Layout/Header";
-import AdDisclosureCard from "~/components/AdDisclosureCard";
+import AdDisclosureList from "~/components/AdDisclosureList";
 
 type Props = {
   serverState?: InstantSearchServerState;
@@ -41,13 +37,7 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
           <SearchBar />
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
-              <Hits
-                classNames={{
-                  item: "rounded shadow-medium",
-                  list: "flex flex-col gap-y-4 items-center",
-                }}
-                hitComponent={AdDisclosureCard}
-              />
+              <AdDisclosureList />
             </div>
           </main>
         </div>
