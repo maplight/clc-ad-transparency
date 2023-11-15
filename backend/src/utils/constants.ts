@@ -1,3 +1,7 @@
+// Arrays of candidates, measures, politicalParties, and filers
+// that we can use to generate fake data. The objects will allow
+// us to add additional properties if we need to.
+
 // These names should be kept in sync with the schema in backend/src/components/ad-disclosure/candidate.json
 export const candidates = [
   { name: "Tracy Kessler-Bechtelar" },
@@ -51,3 +55,13 @@ export const politicalParties = [
 
 export const politicalPartyNames = politicalParties.map(({ name }) => name);
 
+export const filers = [
+  { name: "Americans for a Better Tomorrow, Tomorrow" },
+  { name: "Citizens for a Better Tomorrow" },
+  { name: "Americans for a Better America" },
+  { name: "Citizens for a Better America" },
+  { name: "Americans for a Better Tomorrow, Today" },
+  { name: "Students for a Better Tomorrow, Today" },
+] as const;
+
+export const filerNames = filers.map(({ name }) => name);
