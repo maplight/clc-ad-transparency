@@ -18,7 +18,7 @@ const STRAPI_BASE_URL =
     ? "https://sublime-vitality-a5729e6407.strapiapp.com"
     : "http://localhost:1337";
 
-const AdDisclosure = ({ hit }: Props): ReactElement => {
+const AdDisclosureCard = ({ hit }: Props): ReactElement => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-8 sm:px-4 sm:py-2 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -130,4 +130,4 @@ const AdDisclosure = ({ hit }: Props): ReactElement => {
   );
 };
 
-export default AdDisclosure;
+export default AdDisclosureCard;

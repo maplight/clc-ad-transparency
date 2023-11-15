@@ -10,7 +10,7 @@ import type { ReactElement } from "react";
 import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
 import { HeaderSpacer } from "../Layout/Header";
-import AdDisclosure from "~/components/AdDisclosure";
+import AdDisclosureCard from "~/components/AdDisclosureCard";
 
 type Props = {
   serverState?: InstantSearchServerState;
@@ -46,7 +46,7 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
                   item: "rounded shadow-medium",
                   list: "flex flex-col gap-y-4 items-center",
                 }}
-                hitComponent={AdDisclosure}
+                hitComponent={AdDisclosureCard}
               />
             </div>
           </main>
