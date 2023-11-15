@@ -36,9 +36,12 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
   });
   return {
     adElection: faker.helpers.arrayElement([
-      "Election 1",
-      "Election 2",
-      "Election 3",
+      "U.S. President",
+      "U.S. Senate",
+      "U.S. Representative",
+      "State Senate",
+      "State Representative",
+      "Governor",
     ]) as AdDisclosure["adElection"],
     adFormat: faker.helpers.arrayElement([
       "Digital",
@@ -48,7 +51,7 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
       "Radio",
     ]) as AdDisclosure["adFormat"],
     adSpend: faker.number.int({ max: 1000000, min: 1000 }),
-    adTextContent: faker.lorem.paragraph(5),
+    adTextContent: faker.word.words({ count: { min: 15, max: 30 } }),
     authorizedAdSpend: faker.number.int({ max: 1000000, min: 1000 }),
     candidatesMeasuresAndPoliticalParties: faker.helpers.arrayElements(
       [
@@ -58,15 +61,26 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
       ],
       { min: 1, max: 3 }
     ) as AdDisclosure["candidatesMeasuresAndPoliticalParties"],
-    createdAt: Date.now().toString(),
-    updatedAt: Date.now().toString(),
-    createdBy: userId,
-    updatedBy: userId,
+    clickCount: faker.number.int({ max: 10000, min: 100 }),
     endDate: faker.date.between({
       from: startDate,
       to: "2023-12-31",
     }),
+    externalLink: faker.internet.url(),
     startDate,
+    targetAudience: faker.helpers.arrayElement([
+      "Registered Voters",
+      "Unregistered Voters",
+      "Voters",
+      "Non-Voters",
+      "Voters in District 1",
+      "Voters in District 2",
+    ]),
+    viewCount: faker.number.int({ max: 100000, min: 1000 }),
+    createdAt: Date.now().toString(),
+    updatedAt: Date.now().toString(),
+    createdBy: userId,
+    updatedBy: userId,
   };
 };
 
