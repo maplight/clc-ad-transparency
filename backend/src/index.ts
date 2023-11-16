@@ -4,6 +4,7 @@ import generateAdDisclosureData from "./utils/generate-ad-disclosure-data";
 import generateFilingPeriodData from "./utils/generate-filing-period-data";
 import type { Attribute } from "@strapi/strapi";
 import { errors } from "@strapi/utils";
+import { parseISO } from "date-fns";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 
@@ -27,6 +28,8 @@ adDisclosuresIndex.setSettings({
     "measures.lvl1",
     "politicalParties.lvl0",
     "politicalParties.lvl1",
+    "startDateTimestamp",
+    "endDateTimestamp",
   ],
   searchableAttributes: ["adTextContent"],
 });
@@ -146,6 +149,8 @@ export default {
               "politicalParties.lvl0": politicalParties.map(lvl0FacetValues),
               "politicalParties.lvl1": politicalParties.map(lvl1FacetValues),
               filerName: registration.filerName,
+              startDateTimestamp: parseISO(adDisclosure.startDate).getTime(),
+              endDateTimestamp: parseISO(adDisclosure.endDate).getTime(),
             };
           }
         );
