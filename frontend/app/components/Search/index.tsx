@@ -1,16 +1,14 @@
 import type { InstantSearchServerState } from "react-instantsearch";
-import {
-  Hits,
-  InstantSearch,
-  InstantSearchSSRProvider,
-} from "react-instantsearch";
+import { InstantSearch, InstantSearchSSRProvider } from "react-instantsearch";
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
 import searchClient from "~/search-client";
 import type { ReactElement } from "react";
 import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
 import { HeaderSpacer } from "../Layout/Header";
-import AdDisclosure from "~/components/AdDisclosure";
+import AdDisclosureList from "~/components/AdDisclosureList";
+import AdDisclosureTable from "../AdDisclosureTable";
+import { useState } from "react";
 
 type Props = {
   serverState?: InstantSearchServerState;
@@ -18,6 +16,7 @@ type Props = {
 };
 
 const Search = ({ serverState, serverUrl }: Props): ReactElement => {
+  const [view, setView] = useState<"list" | "table">("table");
   return (
     <InstantSearchSSRProvider {...serverState}>
       <InstantSearch
@@ -38,16 +37,10 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
         <FiltersSidebar />
         <div className="lg:pl-72 h-full">
           <HeaderSpacer />
-          <SearchBar />
+          <SearchBar setView={setView} view={view} />
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
-              <Hits
-                classNames={{
-                  item: "rounded shadow-medium",
-                  list: "flex flex-col gap-y-4 items-center",
-                }}
-                hitComponent={AdDisclosure}
-              />
+              {view === "table" ? <AdDisclosureTable /> : <AdDisclosureList />}
             </div>
           </main>
         </div>
