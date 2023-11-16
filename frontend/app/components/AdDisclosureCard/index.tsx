@@ -85,13 +85,6 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
               </div>
             </div>
 
-            {/* Ad Disclosure searchable text content */}
-            <div className="mt-4 space-y-6">
-              <p className="text-base text-gray-500">
-                <Highlight attribute="adTextContent" hit={hit} />
-              </p>
-            </div>
-
             {hit["candidates.lvl1"].length > 0 && (
               <CandidatesMeasuresAndPoliticalParties
                 lvl1={hit["candidates.lvl1"]}
@@ -112,6 +105,13 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
                 title="Parties"
               />
             )}
+
+            {/* Ad Disclosure searchable text content */}
+            <div className="mt-4 space-y-6">
+              <p className="text-base text-gray-500">
+                <Highlight attribute="adTextContent" hit={hit} />
+              </p>
+            </div>
           </section>
         </div>
 
