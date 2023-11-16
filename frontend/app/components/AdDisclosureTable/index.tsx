@@ -1,6 +1,7 @@
 import { useHits } from "react-instantsearch";
 import type { Hit } from "instantsearch.js";
 import type { ReactElement } from "react";
+import Target from "~/components/Target";
 
 const STRAPI_BASE_URL =
   process.env.NODE_ENV === "production"
@@ -8,8 +9,14 @@ const STRAPI_BASE_URL =
     : "http://localhost:1337";
 
 const TableRow = ({ hit }: { hit: Hit }): ReactElement => {
+  const targets: string[] = [
+    ...hit["candidates.lvl1"],
+    ...hit["measures.lvl1"],
+    ...hit["politicalParties.lvl1"],
+  ];
+
   return (
-    <tr key={hit?.id}>
+    <tr key={hit.objectID}>
       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
         {hit.filerName}
       </td>
@@ -18,6 +25,27 @@ const TableRow = ({ hit }: { hit: Hit }): ReactElement => {
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
         {hit.adFormat}
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <div className="grid grid-cols-1 gap-4">
+          {targets.map((item: string, index: number) => (
+            <Target key={index} target={item} />
+          ))}
+        </div>
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        {new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(new Date(hit.startDate))}
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        {new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(new Date(hit.endDate))}
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
         {`$${new Intl.NumberFormat().format(hit.adSpend)}`}
@@ -29,7 +57,7 @@ const TableRow = ({ hit }: { hit: Hit }): ReactElement => {
           rel="noreferrer"
           className="text-primary-500 hover:text-primary-700"
         >
-          View Ad Media
+          View
         </a>
       </td>
     </tr>
@@ -68,6 +96,24 @@ const AdDisclosureTable = (): ReactElement => {
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
+                    Target
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Start Date
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    End Date
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
                     Ad Spend
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -77,7 +123,7 @@ const AdDisclosureTable = (): ReactElement => {
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {hits.map((hit) => (
-                  <TableRow key={hit.id} hit={hit} />
+                  <TableRow key={hit.objectID} hit={hit} />
                 ))}
               </tbody>
             </table>

@@ -3,7 +3,7 @@ import {
   CursorArrowRaysIcon,
   EyeIcon,
 } from "@heroicons/react/24/outline";
-import CandidatesMeasuresAndPoliticalParties from "./CandidatesMeasuresAndPoliticalParties";
+import Target from "~/components/Target";
 import Format from "./Format";
 import type { ReactElement } from "react";
 import type { Hit } from "instantsearch.js";
@@ -19,6 +19,12 @@ const STRAPI_BASE_URL =
     : "http://localhost:1337";
 
 const AdDisclosureCard = ({ hit }: Props): ReactElement => {
+  const targets: string[] = [
+    ...hit["candidates.lvl1"],
+    ...hit["measures.lvl1"],
+    ...hit["politicalParties.lvl1"],
+  ];
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-8 sm:px-4 sm:py-2 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -85,29 +91,14 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
               </div>
             </div>
 
-            {hit["candidates.lvl1"].length > 0 && (
-              <CandidatesMeasuresAndPoliticalParties
-                lvl1={hit["candidates.lvl1"]}
-                title="Candidates"
-              />
-            )}
-
-            {hit["measures.lvl1"].length > 0 && (
-              <CandidatesMeasuresAndPoliticalParties
-                lvl1={hit["measures.lvl1"]}
-                title="Measures"
-              />
-            )}
-
-            {hit["politicalParties.lvl1"].length > 0 && (
-              <CandidatesMeasuresAndPoliticalParties
-                lvl1={hit["politicalParties.lvl1"]}
-                title="Parties"
-              />
-            )}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-8">
+              {targets.map((item: string, index: number) => (
+                <Target key={index} target={item} />
+              ))}
+            </div>
 
             {/* Ad Disclosure searchable text content */}
-            <div className="mt-4 space-y-6">
+            <div className="mt-8 space-y-6">
               <p className="text-base text-gray-500">
                 <Highlight attribute="adTextContent" hit={hit} />
               </p>

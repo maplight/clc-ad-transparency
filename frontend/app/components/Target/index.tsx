@@ -3,8 +3,7 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import type { ReactElement } from "react";
 
 type Props = {
-  lvl1: string[];
-  title: string;
+  target: string;
 };
 
 type Position = "Opposes" | "Supports" | "Neither";
@@ -43,33 +42,19 @@ const getPosition = (position: Position): string => {
   return position;
 };
 
-const CandidatesMeasuresAndPoliticalParties = ({
-  lvl1,
-  title,
-}: Props): ReactElement => {
+const Target = ({ target }: Props): ReactElement => {
+  const labelAndPosition = target.split(" > ");
+
+  const label = labelAndPosition[0];
+  const position = labelAndPosition[1];
   return (
-    <div>
-      <h3 className="block text-sm font-medium text-gray-700 mt-8">{title}</h3>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {lvl1.map((item: string, index: number) => {
-          // The `item` will be in the format of "candidate | measure | party > position"
-          const labelAndPosition = item.split(" > ");
-
-          const label = labelAndPosition[0];
-          const position = labelAndPosition[1];
-
-          return (
-            <div key={index} className="mt-2 flex items-center">
-              {getPositionIcon(position as Position)}
-              <p className="ml-2 text-sm text-gray-500">
-                {getPosition(position as Position)} {label}
-              </p>
-            </div>
-          );
-        })}
-      </div>
+    <div className="flex items-center">
+      {getPositionIcon(position as Position)}
+      <p className="ml-2 text-sm text-gray-500">
+        {getPosition(position as Position)} {label}
+      </p>
     </div>
   );
 };
 
-export default CandidatesMeasuresAndPoliticalParties;
+export default Target;
