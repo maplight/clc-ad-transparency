@@ -33,6 +33,31 @@ const sortOptions = [
     label: "End Date (desc)",
     value: `ad_disclosures_${process.env.NODE_ENV}_endDateTimestamp_desc`,
   },
+  // Textual attributes
+  {
+    label: "Filer Name (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_filerName_asc`,
+  },
+  {
+    label: "Filer Name (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_filerName_desc`,
+  },
+  {
+    label: "Election (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adElection_asc`,
+  },
+  {
+    label: "Election (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adElection_desc`,
+  },
+  {
+    label: "Ad Format (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adFormat_asc`,
+  },
+  {
+    label: "Ad Format (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adFormat_desc`,
+  },
 ];
 
 const SearchBar = ({ setView, view }: Props): ReactElement => {
