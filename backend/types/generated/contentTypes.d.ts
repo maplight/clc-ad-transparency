@@ -540,14 +540,7 @@ export interface ApiAdDisclosureAdDisclosure extends Schema.CollectionType {
   };
   attributes: {
     adElection: Attribute.Enumeration<
-      [
-        'U.S. President',
-        'U.S. Senate',
-        'U.S. Representative',
-        'State Senate',
-        'State Representative',
-        'Governor'
-      ]
+      ['Election 2020', 'Election 2022', 'Election 2024']
     > &
       Attribute.Required;
     adFormat: Attribute.Enumeration<

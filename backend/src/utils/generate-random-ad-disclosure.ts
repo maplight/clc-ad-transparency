@@ -31,17 +31,14 @@ const generateRandomCandidateMeasureOrPoliticalParty = () => {
 
 const generateRandomAdDisclosure = (userId: User["id"]) => {
   const startDate = faker.date.between({
-    from: "2023-01-01",
+    from: "2020-01-01",
     to: "2023-12-31",
   });
   return {
     adElection: faker.helpers.arrayElement([
-      "U.S. President",
-      "U.S. Senate",
-      "U.S. Representative",
-      "State Senate",
-      "State Representative",
-      "Governor",
+      "Election 2020",
+      "Election 2022",
+      "Election 2024",
     ]) as AdDisclosure["adElection"],
     adFormat: faker.helpers.arrayElement([
       "Digital",

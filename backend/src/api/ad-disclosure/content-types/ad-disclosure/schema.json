@@ -2,12 +2,9 @@
   "attributes": {
     "adElection": {
       "enum": [
-        "U.S. President",
-        "U.S. Senate",
-        "U.S. Representative",
-        "State Senate",
-        "State Representative",
-        "Governor"
+        "Election 2020",
+        "Election 2022",
+        "Election 2024"
       ],
       "required": true,
       "type": "enumeration"
