@@ -46,6 +46,23 @@ const SearchFilters = () => {
         </Card>
       </li>
       <li>
+        <Card title="Office">
+          <RefinementList
+            attribute="offices.lvl0"
+            classNames={{
+              checkbox: "text-primary-500 focus:ring-primary-500 rounded",
+              selectedItem: "font-medium text-primary-500",
+              showMore:
+                "bg-none hover:bg-none focus:bg-none bg-primary-600 hover:bg-primary-500 focus:bg-primary-500 focus:ring-0 text-white font-bold py-2 px-4 rounded",
+            }}
+            limit={5}
+            searchable
+            showMore
+            sortBy={["count:desc", "name:asc", "isRefined:asc"]}
+          />
+        </Card>
+      </li>
+      <li>
         <Card title="Measure">
           <RefinementList
             attribute="measures.lvl0"
