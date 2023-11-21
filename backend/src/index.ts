@@ -5,6 +5,7 @@ import generateFilingPeriodData from "./utils/generate-filing-period-data";
 import type { Attribute } from "@strapi/strapi";
 import { errors } from "@strapi/utils";
 import { parseISO } from "date-fns";
+import { candidates as candidatesConstant } from "./utils/constants";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 
@@ -51,6 +52,8 @@ adDisclosuresIndex.setSettings({
     "afterDistinct(searchable(measures.lvl0))",
     "measures.lvl1",
     "afterDistinct(searchable(politicalParties.lvl0))",
+    "offices.lvl0",
+    "afterDistinct(searchable(offices.lvl0))",
     "politicalParties.lvl1",
     "startDateTimestamp",
     "endDateTimestamp",
@@ -62,6 +65,7 @@ adDisclosuresIndex.setSettings({
     "candidates.lvl0",
     "measures.lvl0",
     "politicalParties.lvl0",
+    "offices.lvl0",
   ],
 });
 
@@ -207,15 +211,20 @@ export default {
               "ad-disclosure.political-party"
             );
 
+            const candidatesLvl0 = candidates.map(lvl0FacetValues);
+
             return {
               objectID: id,
               ...adDisclosure,
-              "candidates.lvl0": candidates.map(lvl0FacetValues),
+              "candidates.lvl0": candidatesLvl0,
               "candidates.lvl1": candidates.map(lvl1FacetValues),
               "measures.lvl0": measures.map(lvl0FacetValues),
               "measures.lvl1": measures.map(lvl1FacetValues),
               "politicalParties.lvl0": politicalParties.map(lvl0FacetValues),
               "politicalParties.lvl1": politicalParties.map(lvl1FacetValues),
+              "offices.lvl0": candidatesConstant
+                .filter(({ name }) => candidatesLvl0.includes(name))
+                .map(({ office }) => office),
               filerName: registration.filerName,
               startDateTimestamp: parseISO(adDisclosure.startDate).getTime(),
               endDateTimestamp: parseISO(adDisclosure.endDate).getTime(),

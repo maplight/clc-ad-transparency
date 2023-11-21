@@ -4,26 +4,86 @@
 
 // These names should be kept in sync with the schema in backend/src/components/ad-disclosure/candidate.json
 export const candidates = [
-  { name: "Tracy Kessler-Bechtelar" },
-  { name: "Dominic Kerluke" },
-  { name: "Neil Brown" },
-  { name: "Bessie Nitzsche" },
-  { name: "Sarah Homenick" },
-  { name: "Leonard Auer" },
-  { name: "Frankie Swift Jr." },
-  { name: "Alyssa Nicolas DVM" },
-  { name: "Nora Fritsch V" },
-  { name: "Lindsey Mohr" },
-  { name: "Patty Sporer-Blick" },
-  { name: "Gilberto O'Kon-Schmitt" },
-  { name: "Bessie Hudson" },
-  { name: "Lionel Wehner IV" },
-  { name: "Hattie Schmidt" },
-  { name: "Nicolas Conn-Conn" },
-  { name: "Kellie Sipes" },
-  { name: "Roman Tremblay-Hegmann" },
-  { name: "Toni Herzog" },
-  { name: "Randolph Zieme" },
+  {
+    name: "Tracy Kessler-Bechtelar",
+    office: "Justice of the Supreme Court",
+  },
+  {
+    name: "Dominic Kerluke",
+    office: "Secretary of State",
+  },
+  {
+    name: "Neil Brown",
+    office: "Attorney General",
+  },
+  {
+    name: "Bessie Nitzsche",
+    office: "Comptroller",
+  },
+  {
+    name: "Sarah Homenick",
+    office: "Treasurer",
+  },
+  {
+    name: "Leonard Auer",
+    office: "U.S. Senator",
+  },
+  {
+    name: "Frankie Swift Jr.",
+    office: "U.S. Representative",
+  },
+  {
+    name: "Alyssa Nicolas DVM",
+    office: "State Senator",
+  },
+  {
+    name: "Nora Fritsch V",
+    office: "State Representative",
+  },
+  {
+    name: "Lindsey Mohr",
+    office: "County Board Member",
+  },
+  {
+    name: "Patty Sporer-Blick",
+    office: "County Clerk",
+  },
+  {
+    name: "Gilberto O'Kon-Schmitt",
+    office: "County Treasurer",
+  },
+  {
+    name: "Bessie Hudson",
+    office: "County Sheriff",
+  },
+  {
+    name: "Lionel Wehner IV",
+    office: "County Assessor",
+  },
+  {
+    name: "Hattie Schmidt",
+    office: "County Auditor",
+  },
+  {
+    name: "Nicolas Conn-Conn",
+    office: "County Recorder",
+  },
+  {
+    name: "Kellie Sipes",
+    office: "County Coroner",
+  },
+  {
+    name: "Roman Tremblay-Hegmann",
+    office: "County Surveyor",
+  },
+  {
+    name: "Toni Herzog",
+    office: "County Superintendent of Schools",
+  },
+  {
+    name: "Randolph Zieme",
+    office: "County Commissioner",
+  },
 ] as const;
 
 export const candidateNames = candidates.map(({ name }) => name);
