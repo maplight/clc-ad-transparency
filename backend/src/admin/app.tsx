@@ -6,7 +6,7 @@ export default {
         "app.components.LeftMenu.navbrand.title": "Ad Disclosure Dashboard",
         "app.components.LeftMenuLinkContainer.collectionTypes": "Data Types",
         "Auth.form.welcome.subtitle": "Log in to your Ad Disclosure account",
-        "Auth.form.welcome.title": "Welcome to Ad Disclosure!",
+        "Auth.form.welcome.title": "Welcome to Ad Disclosure",
         "content-manager.components.LeftMenu.collection-types": "Data Types",
         "content-manager.containers.SettingsPage.Block.contentType.title": "Data Types",
         "content-manager.header.name": "Filings",
