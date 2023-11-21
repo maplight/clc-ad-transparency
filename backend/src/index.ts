@@ -173,11 +173,7 @@ export default {
             filters: {
               id: reportAdDisclosureIds,
             },
-            populate: [
-              "adMedia",
-              "candidatesMeasuresAndPoliticalParties",
-              "createdBy",
-            ],
+            populate: ["adMedia", "candidatesMeasuresAndPoliticalParties"],
           }
         );
 
