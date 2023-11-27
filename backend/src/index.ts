@@ -46,17 +46,23 @@ adDisclosuresIndex.setSettings({
     "adFormat",
     "adSpend",
     "afterDistinct(searchable(filerName))",
-    "candidates.lvl0",
+    "afterDistinct(searchable(candidates.lvl0))",
     "candidates.lvl1",
-    "measures.lvl0",
+    "afterDistinct(searchable(measures.lvl0))",
     "measures.lvl1",
-    "politicalParties.lvl0",
+    "afterDistinct(searchable(politicalParties.lvl0))",
     "politicalParties.lvl1",
     "startDateTimestamp",
     "endDateTimestamp",
   ],
   replicas,
-  searchableAttributes: ["adTextContent"],
+  searchableAttributes: [
+    "adTextContent",
+    "filerName",
+    "candidates.lvl0",
+    "measures.lvl0",
+    "politicalParties.lvl0",
+  ],
 });
 
 replicaIndices.forEach((replicaIndex) => {
