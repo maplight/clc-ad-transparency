@@ -2,21 +2,15 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { useHits } from "react-instantsearch";
 import extractAdDisclosure from "./extract-ad-disclosure";
 import jsonToCsv from "utils/json-to-csv";
+import downloadCsv from "utils/download-csv";
 
 const DownloadCsv = () => {
   const { hits } = useHits();
 
   const handleClick = () => {
     const csv = jsonToCsv(hits.map((hit) => extractAdDisclosure(hit)));
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.setAttribute("download", "ad-disclosures.csv");
-    link.style.visibility = "hidden";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    downloadCsv(csv, "ad-disclosures.csv");
   };
 
   return (

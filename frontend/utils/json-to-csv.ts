@@ -1,5 +1,5 @@
 // Utility function to convert javascript object to csv
-const jsonToCsv = (json: any) => {
+const jsonToCsv = (json: any): string => {
   const fields = Object.keys(json[0]);
   const replacer = (key: any, value: any) => (value === null ? "" : value);
   let csv = json.map((row: any) =>
