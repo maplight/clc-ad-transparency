@@ -9,17 +9,14 @@ import type { ReactElement } from "react";
 import type { Hit } from "instantsearch.js";
 import { Highlight } from "react-instantsearch";
 import { format, parseISO } from "date-fns";
+import getEnv from "utils/get-env";
 
 type Props = {
   hit: Hit;
 };
 
-const STRAPI_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://sublime-vitality-a5729e6407.strapiapp.com"
-    : "http://localhost:1337";
-
 const AdDisclosureCard = ({ hit }: Props): ReactElement => {
+  const env = getEnv();
   const targets: string[] = [
     ...hit["candidates.lvl1"],
     ...hit["measures.lvl1"],
@@ -125,7 +122,7 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
             <img
-              src={`${STRAPI_BASE_URL}${hit.adMedia[0].url}`}
+              src={`${env.STRAPI_BASE_URL}${hit.adMedia[0].url}`}
               alt={hit.adMedia[0].alternativeText || hit.adTextContent}
               className="h-full w-full object-cover object-center"
             />

@@ -1,3 +1,4 @@
+import DownloadCsv from "./download-csv";
 import { SearchBox, SortBy } from "react-instantsearch";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import ViewToggle from "./view-toggle";
@@ -93,6 +94,7 @@ const SearchBar = ({ setView, view }: Props): ReactElement => {
         items={sortOptions}
       />
 
+      <DownloadCsv />
       <ViewToggle setView={setView} view={view} />
     </div>
   );

@@ -3,13 +3,11 @@ import type { Hit } from "instantsearch.js";
 import type { ReactElement } from "react";
 import Target from "~/components/Target";
 import { format, parseISO } from "date-fns";
-
-const STRAPI_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://sublime-vitality-a5729e6407.strapiapp.com"
-    : "http://localhost:1337";
+import getEnv from "utils/get-env";
 
 const TableRow = ({ hit }: { hit: Hit }): ReactElement => {
+  const env = getEnv();
+
   const targets: string[] = [
     ...hit["candidates.lvl1"],
     ...hit["measures.lvl1"],
@@ -45,7 +43,7 @@ const TableRow = ({ hit }: { hit: Hit }): ReactElement => {
       </td>
       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
         <a
-          href={`${STRAPI_BASE_URL}${hit.adMedia[0].url}`}
+          href={`${env.STRAPI_BASE_URL}${hit.adMedia[0].url}`}
           target="_blank"
           rel="noreferrer"
           className="text-primary-500 hover:text-primary-700"
