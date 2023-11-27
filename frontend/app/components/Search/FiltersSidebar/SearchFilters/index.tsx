@@ -1,6 +1,7 @@
 import { HierarchicalMenu, Menu, RefinementList } from "react-instantsearch";
 import MenuSelect from "~/components/MenuSelect";
 import NumericMenu from "~/components/NumericMenu";
+import DateSelect from "~/components/DateSelect";
 import Card from "~/components/Card";
 
 const SearchFilters = () => {
@@ -84,6 +85,11 @@ const SearchFilters = () => {
             }}
             sortBy={["count:desc", "name:asc", "isRefined:asc"]}
           />
+        </Card>
+      </li>
+      <li>
+        <Card title="Date">
+          <DateSelect />
         </Card>
       </li>
     </ul>

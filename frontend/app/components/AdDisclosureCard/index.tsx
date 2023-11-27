@@ -8,6 +8,7 @@ import Format from "./Format";
 import type { ReactElement } from "react";
 import type { Hit } from "instantsearch.js";
 import { Highlight } from "react-instantsearch";
+import { format, parseISO } from "date-fns";
 
 type Props = {
   hit: Hit;
@@ -32,7 +33,21 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
         <div className="lg:max-w-lg lg:self-end">
           <div className="flex items-center space-x-2">
             <div className="flex items-center text-sm">
-              <p className="font-medium text-gray-500">{hit.adElection}</p>
+              <p className="font-light text-gray-500">{hit.adElection}</p>
+            </div>
+            <svg
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              className="ml-2 h-5 w-5 flex-shrink-0 text-gray-300"
+            >
+              <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+            </svg>
+            <div className="flex items-center text-sm">
+              <p className="font-light text-gray-500">{`${format(
+                parseISO(hit.startDate),
+                "MMM d, yyyy"
+              )} — ${format(parseISO(hit.endDate), "MMM d, yyyy")}`}</p>
             </div>
           </div>
 

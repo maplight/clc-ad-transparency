@@ -2,6 +2,7 @@ import { useHits } from "react-instantsearch";
 import type { Hit } from "instantsearch.js";
 import type { ReactElement } from "react";
 import Target from "~/components/Target";
+import { format, parseISO } from "date-fns";
 
 const STRAPI_BASE_URL =
   process.env.NODE_ENV === "production"
@@ -34,18 +35,10 @@ const TableRow = ({ hit }: { hit: Hit }): ReactElement => {
         </div>
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-        {new Intl.DateTimeFormat("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(new Date(hit.startDate))}
+        {format(parseISO(hit.startDate), "MMM d, yyyy")}
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-        {new Intl.DateTimeFormat("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(new Date(hit.endDate))}
+        {format(parseISO(hit.endDate), "MMM d, yyyy")}
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
         {`$${new Intl.NumberFormat().format(hit.adSpend)}`}
