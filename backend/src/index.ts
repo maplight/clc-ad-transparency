@@ -16,6 +16,30 @@ const adDisclosuresIndex = algoliaClient.initIndex(
   `ad_disclosures_${process.env.NODE_ENV}`
 );
 
+const textualAttributeReplicas = [
+  `ad_disclosures_${process.env.NODE_ENV}_filerName_asc`,
+  `ad_disclosures_${process.env.NODE_ENV}_filerName_desc`,
+  `ad_disclosures_${process.env.NODE_ENV}_adElection_asc`,
+  `ad_disclosures_${process.env.NODE_ENV}_adElection_desc`,
+  `ad_disclosures_${process.env.NODE_ENV}_adFormat_asc`,
+  `ad_disclosures_${process.env.NODE_ENV}_adFormat_desc`,
+];
+
+const numericalAttributeReplicas = [
+  `ad_disclosures_${process.env.NODE_ENV}_adSpend_asc`,
+  `ad_disclosures_${process.env.NODE_ENV}_adSpend_desc`,
+  `ad_disclosures_${process.env.NODE_ENV}_startDateTimestamp_asc`,
+  `ad_disclosures_${process.env.NODE_ENV}_startDateTimestamp_desc`,
+  `ad_disclosures_${process.env.NODE_ENV}_endDateTimestamp_asc`,
+  `ad_disclosures_${process.env.NODE_ENV}_endDateTimestamp_desc`,
+];
+
+const replicas = [...textualAttributeReplicas, ...numericalAttributeReplicas];
+
+const replicaIndices = replicas.map((replica) =>
+  algoliaClient.initIndex(replica)
+);
+
 adDisclosuresIndex.setSettings({
   attributesForFaceting: [
     "adElection",
@@ -31,7 +55,49 @@ adDisclosuresIndex.setSettings({
     "startDateTimestamp",
     "endDateTimestamp",
   ],
+  replicas,
   searchableAttributes: ["adTextContent"],
+});
+
+replicaIndices.forEach((replicaIndex) => {
+  const replicaIndexNameArray = replicaIndex.indexName.split("_");
+  // Index name will be in the format of `ad_disclosures_${process.env.NODE_ENV}_${attribute}_{asc|desc}`
+  const attribute = replicaIndexNameArray[replicaIndexNameArray.length - 2];
+  const sort = replicaIndexNameArray[replicaIndexNameArray.length - 1];
+
+  const isTextualAttributeReplica = textualAttributeReplicas.includes(
+    replicaIndex.indexName
+  );
+
+  const numericalRanking = [
+    `${sort}(${attribute})`,
+    "typo",
+    "geo",
+    "words",
+    "filters",
+    "proximity",
+    "attribute",
+    "exact",
+    "custom",
+  ];
+
+  const textualRanking = [
+    "custom",
+    "typo",
+    "geo",
+    "words",
+    "filters",
+    "proximity",
+    "attribute",
+    "exact",
+  ];
+
+  replicaIndex.setSettings({
+    customRanking: isTextualAttributeReplica
+      ? [`${sort}(${attribute})`]
+      : undefined,
+    ranking: isTextualAttributeReplica ? textualRanking : numericalRanking,
+  });
 });
 
 const getValuesByComponent = (

@@ -1,4 +1,4 @@
-import { SearchBox } from "react-instantsearch";
+import { SearchBox, SortBy } from "react-instantsearch";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import ViewToggle from "./view-toggle";
 import type { ReactElement } from "react";
@@ -7,6 +7,58 @@ type Props = {
   setView: (view: "list" | "table") => void;
   view: "list" | "table";
 };
+
+const sortOptions = [
+  {
+    label: "Ad Spend (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adSpend_asc`,
+  },
+  {
+    label: "Ad Spend (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adSpend_desc`,
+  },
+  {
+    label: "Start Date (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_startDateTimestamp_asc`,
+  },
+  {
+    label: "Start Date (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_startDateTimestamp_desc`,
+  },
+  {
+    label: "End Date (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_endDateTimestamp_asc`,
+  },
+  {
+    label: "End Date (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_endDateTimestamp_desc`,
+  },
+  // Textual attributes
+  {
+    label: "Filer Name (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_filerName_asc`,
+  },
+  {
+    label: "Filer Name (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_filerName_desc`,
+  },
+  {
+    label: "Election (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adElection_asc`,
+  },
+  {
+    label: "Election (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adElection_desc`,
+  },
+  {
+    label: "Ad Format (asc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adFormat_asc`,
+  },
+  {
+    label: "Ad Format (desc)",
+    value: `ad_disclosures_${process.env.NODE_ENV}_adFormat_desc`,
+  },
+];
 
 const SearchBar = ({ setView, view }: Props): ReactElement => {
   return (
@@ -31,6 +83,14 @@ const SearchBar = ({ setView, view }: Props): ReactElement => {
           root: "flex flex-1 h-full w-full py-3",
         }}
         placeholder="Search..."
+      />
+
+      <SortBy
+        classNames={{
+          select:
+            "block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6",
+        }}
+        items={sortOptions}
       />
 
       <ViewToggle setView={setView} view={view} />
