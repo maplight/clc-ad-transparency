@@ -1,9 +1,5 @@
 import type { Hit } from "instantsearch.js";
-
-const STRAPI_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://sublime-vitality-a5729e6407.strapiapp.com"
-    : "http://localhost:1337";
+import getEnv from "utils/get-env";
 
 type Target = {
   name: string;
@@ -15,11 +11,13 @@ type Target = {
 const extractAdDisclosure = (hit: Hit) => {
   if (!hit) return null;
 
+  const env = getEnv();
+
   return {
     filerName: hit.filerName,
     adElection: hit.adElection,
     adFormat: hit.adFormat,
-    adMedia: `${STRAPI_BASE_URL}${hit.adMedia[0].url}`,
+    adMedia: `${env.STRAPI_BASE_URL}${hit.adMedia[0].url}`,
     adSpend: hit.adSpend,
     adTextContent: hit.adTextContent,
     authorizedAdSpend: hit.authorizedAdSpend,
