@@ -34,6 +34,10 @@ const uploadAdDisclosureMedia = async (strapi: Strapi, currentUser: User) => {
     const mimeType = mime.getType(filename);
     const ext = mime.getExtension(mimeType);
 
+    const url = `${
+      process.env.NODE_ENV === "production" ? process.env.STRAPI_BASE_URL : ""
+    }/ad-disclosure-media/${randomAdDisclosureMediaDirectory}/${filename}`;
+
     const mediaUpload = uploadFile(
       strapi,
       {
@@ -47,7 +51,7 @@ const uploadAdDisclosureMedia = async (strapi: Strapi, currentUser: User) => {
           randomAdDisclosureMediaDirectory,
           filename
         ),
-        url: `/ad-disclosure-media/${randomAdDisclosureMediaDirectory}/${filename}`,
+        url,
       },
       currentUser
     );
