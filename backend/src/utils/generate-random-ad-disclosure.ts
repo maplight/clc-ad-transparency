@@ -1,6 +1,11 @@
 import { faker } from "@faker-js/faker";
 import type { Attribute } from "@strapi/strapi";
-import { candidateNames, measureNames, politicalPartyNames } from "./constants";
+import {
+  adTextContentExamples,
+  candidateNames,
+  measureNames,
+  politicalPartyNames,
+} from "./constants";
 
 type AdDisclosure = Attribute.GetValues<"api::ad-disclosure.ad-disclosure">;
 type User = Attribute.GetValues<"admin::user">;
@@ -48,7 +53,7 @@ const generateRandomAdDisclosure = (userId: User["id"]) => {
       "Radio",
     ]) as AdDisclosure["adFormat"],
     adSpend: faker.number.int({ max: 1000000, min: 1000 }),
-    adTextContent: faker.word.words({ count: { min: 15, max: 30 } }),
+    adTextContent: faker.helpers.arrayElement(adTextContentExamples),
     authorizedAdSpend: faker.number.int({ max: 1000000, min: 1000 }),
     candidatesMeasuresAndPoliticalParties: faker.helpers.arrayElements(
       [
