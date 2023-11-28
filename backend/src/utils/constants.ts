@@ -125,3 +125,17 @@ export const filers = [
 ] as const;
 
 export const filerNames = filers.map(({ name }) => name);
+
+export const adTextContentExamples = [
+  `Meet John Smith, your neighbor and advocate for change. With a proven track record of community service, John Smith is ready to represent you. Together, we can build a brighter future for our district.`,
+  `Let's get our economy back on track. With Sarah Johnson's vision, we can create jobs, support local businesses, and ensure that everyone has a fair shot at success.`,
+  `It's time to put aside divisive politics and come together. Michael Anderson is dedicated to finding common ground and working across the aisle to get things done for our community.`,
+  `Mayor Jennifer Martinez and Senator Robert Baker support Emily Clark because they trust her vision and dedication. Join us in supporting the candidate that has earned the trust of our community.`,
+  `Your vote matters. Join the movement for positive change. Stand with Thomas Nelson on Election Day and together, we can shape the future of our community.`,
+  `Our children deserve the best education possible. Vote 'YES' on Measure 1 to provide much-needed funding for our schools. Together, we can ensure every child has access to a quality education.`,
+  `Our environment is at risk, but we have a solution. Support Measure B to promote clean energy, reduce pollution, and protect our planet for future generations. Vote 'YES' for a greener tomorrow.`,
+  `Higher property taxes hurt homeowners and small businesses. Say 'NO' to Measure 3 and protect your hard-earned money. We need responsible spending, not higher taxes.`,
+  `We all want safer communities. However, Measure X goes too far. Voting 'NO' ensures we maintain law and order while finding more balanced solutions for criminal justice reform.`,
+  `The Democratic Party is committed to progress, equality, and a brighter future for all Americans. Join us in supporting candidates who champion healthcare for all, climate action, and a fair economy. Together, we can move our nation forward.`,
+  `The Republican Party stands for strong national security, lower taxes, and limited government. Support our candidates who prioritize individual freedoms, economic growth, and traditional values. Let's protect what makes America great.`,
+];
