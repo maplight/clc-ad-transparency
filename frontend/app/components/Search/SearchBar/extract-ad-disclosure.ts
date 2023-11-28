@@ -1,5 +1,4 @@
 import type { Hit } from "instantsearch.js";
-import getEnv from "utils/get-env";
 
 type Target = {
   name: string;
@@ -11,13 +10,13 @@ type Target = {
 const extractAdDisclosure = (hit: Hit) => {
   if (!hit) return null;
 
-  const env = getEnv();
-
   return {
     filerName: hit.filerName,
     adElection: hit.adElection,
     adFormat: hit.adFormat,
-    adMedia: `${env.STRAPI_BASE_URL}${hit.adMedia[0].url}`,
+    adMedia: `${
+      process.env.NODE_ENV === "development" ? "http://localhost:1337" : ""
+    }${hit.adMedia[0].url}`,
     adSpend: hit.adSpend,
     adTextContent: hit.adTextContent,
     authorizedAdSpend: hit.authorizedAdSpend,
