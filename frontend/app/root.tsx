@@ -30,7 +30,6 @@ export const loader = async () => {
     ENV: {
       ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
       ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY,
-      STRAPI_BASE_URL: process.env.STRAPI_BASE_URL || "http://localhost:1337",
     },
   });
 };
