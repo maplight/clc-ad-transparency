@@ -2,6 +2,8 @@ import { prefixPluginTranslations } from "@strapi/helper-plugin";
 import AdDisclosureTableIcon from "./components/AdDisclosureTable/AdDisclosureTableIcon";
 import getTrad from "./utils/getTrad";
 import pluginId from "./pluginId";
+import PluginIcon from './components/PluginIcon';
+import ListViewInstructions from './components/Injected/list-view-instructions';
 
 export default {
   register(app: any) {
@@ -25,6 +27,54 @@ export default {
             /* webpackChunkName: 'ad-disclosure-table-component' */ "./components/AdDisclosureTable"
           ),
       },
+    });
+    app.addMenuLink({
+      to: `/plugins/${pluginId}`,
+      icon: PluginIcon,
+      intlLabel: {
+        id: `${pluginId}.plugin.name`,
+        defaultMessage: 'Instructions',
+      },
+      Component: async () => {
+        const component = await import(/* webpackChunkName: "[request]" */ './pages/App');
+
+        return component;
+      },
+    });
+    app.createSettingSection(
+      {
+        id: pluginId,
+        intlLabel: {
+          id: `${pluginId}.plugin.name`,
+          defaultMessage: 'Instructions',
+        },
+      },
+      [
+        {
+          intlLabel: {
+            id: `${pluginId}.plugin.name`,
+            defaultMessage: 'Instruction Content',
+          },
+          id: 'settings',
+          to: `/settings/${pluginId}`,
+          Component: async () => {
+            return import('./pages/Settings');
+          },
+          permissions: [
+            {
+              action: "plugin::clc-ad.update",
+              subject: null
+            }
+          ]
+        },
+      ]
+    );
+  },
+
+  bootstrap(app: any) {
+    app.injectContentManagerComponent('listView', 'actions', {
+      name: 'list-view-instructions',
+      Component: ListViewInstructions,
     });
   },
 
