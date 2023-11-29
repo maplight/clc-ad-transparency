@@ -1,6 +1,6 @@
 export default {
-  'ad-disclosure-report': {
+  'clc-ad': {
     enabled: true,
-    resolve: './src/plugins/ad-disclosure-report'
+    resolve: './src/plugins/clc-ad'
   }
 }

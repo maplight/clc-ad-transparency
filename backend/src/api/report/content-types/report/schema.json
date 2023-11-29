@@ -1,7 +1,7 @@
 {
   "attributes": {
     "adDisclosures": {
-      "customField": "plugin::ad-disclosure-report.ad-disclosure-table",
+      "customField": "plugin::clc-ad.ad-disclosure-table",
       "type": "customField"
     },
     "filingPeriod": {

@@ -1,10 +1,10 @@
 {
-  "name": "ad-disclosure-report",
+  "name": "clc-ad",
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "ad-disclosure-report",
-    "description": "Description of ad-disclosure-report plugin",
+    "name": "clc-ad",
+    "description": "Description of clc-ad plugin",
     "kind": "plugin"
   },
   "dependencies": {
