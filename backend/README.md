@@ -42,12 +42,12 @@ npm run build
 yarn build
 ```
 
-### Building `ad-disclosure-report` plugin locally
+### Building `clc-ad` plugin locally
 
 1. Install plugin dependencies
 
 ```
-cd src/plugins/ad-disclosure-report
+cd src/plugins/clc-ad
 yarn
 ```
 

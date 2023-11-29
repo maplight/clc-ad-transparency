@@ -7,7 +7,7 @@ export default {
   register(app: any) {
     app.customFields.register({
       name: "ad-disclosure-table",
-      pluginId: "ad-disclosure-report",
+      pluginId: "clc-ad",
       type: "text",
       icon: AdDisclosureTableIcon,
       intlLabel: {

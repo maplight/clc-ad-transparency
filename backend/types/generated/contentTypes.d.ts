@@ -657,7 +657,7 @@ export interface ApiReportReport extends Schema.CollectionType {
   };
   attributes: {
     adDisclosures: Attribute.Text &
-      Attribute.CustomField<'plugin::ad-disclosure-report.ad-disclosure-table'>;
+      Attribute.CustomField<'plugin::clc-ad.ad-disclosure-table'>;
     filingPeriod: Attribute.Relation<
       'api::report.report',
       'oneToOne',
