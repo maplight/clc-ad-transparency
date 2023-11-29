@@ -3,15 +3,37 @@
  * HomePage
  *
  */
+//{ memo, useState, useEffect }
+import { useState, useEffect } from 'react';
+import { useFetchClient } from '@strapi/helper-plugin';
 
-import React from 'react';
-import pluginId from '../../pluginId';
+import {
+  BaseHeaderLayout,
+  ContentLayout
+} from '@strapi/design-system'
 
 const HomePage = () => {
+  const [instructions, setInstructions] = useState('loading instructions');
+  const { get } = useFetchClient();
+
+  useEffect(() => {
+    get('/clc-ad').then(res => {
+      setInstructions(res.data);
+    });
+  }, [setInstructions]);
+
   return (
     <div>
-      <h1>{pluginId}&apos;s HomePage</h1>
-      <p>Happy coding</p>
+      <BaseHeaderLayout
+        title="Instructions"
+        subtitle="How to use the CLC Ad Database"
+        as="h2"
+      />
+      <ContentLayout>
+        <div style={{whiteSpace : "pre-line"}}>
+          { instructions }
+        </div>
+      </ContentLayout>
     </div>
   );
 };
