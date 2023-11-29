@@ -3,13 +3,13 @@
  * HomePage
  *
  */
-//{ memo, useState, useEffect }
 import { useState, useEffect } from 'react';
 import { useFetchClient } from '@strapi/helper-plugin';
 
 import {
   BaseHeaderLayout,
-  ContentLayout
+  ContentLayout,
+  Box,
 } from '@strapi/design-system'
 
 const HomePage = () => {
@@ -30,9 +30,7 @@ const HomePage = () => {
         as="h2"
       />
       <ContentLayout>
-        <div style={{whiteSpace : "pre-line"}}>
-          { instructions }
-        </div>
+        <Box color="neutral600" style={{whiteSpace : "pre-line"}}>{instructions}</Box>
       </ContentLayout>
     </div>
   );
