@@ -4,6 +4,7 @@ import getTrad from "./utils/getTrad";
 import pluginId from "./pluginId";
 import PluginIcon from './components/PluginIcon';
 import ListViewInstructions from './components/Injected/list-view-instructions';
+import EditViewButton from './components/Injected/edit-view-button';
 
 export default {
   register(app: any) {
@@ -75,6 +76,10 @@ export default {
     app.injectContentManagerComponent('listView', 'actions', {
       name: 'list-view-instructions',
       Component: ListViewInstructions,
+    });
+    app.injectContentManagerComponent('editView', 'informations', {
+      name: 'edit-view-button',
+      Component: EditViewButton,
     });
   },
 
