@@ -1,5 +1,9 @@
 import type { InstantSearchServerState } from "react-instantsearch";
-import { InstantSearch, InstantSearchSSRProvider } from "react-instantsearch";
+import {
+  InstantSearch,
+  InstantSearchSSRProvider,
+  Pagination,
+} from "react-instantsearch";
 import { history } from "instantsearch.js/cjs/lib/routers/index.js";
 import searchClient from "~/search-client";
 import type { ReactElement } from "react";
@@ -41,6 +45,9 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
               {view === "table" ? <AdDisclosureTable /> : <AdDisclosureList />}
+              <Pagination
+                classNames={{ root: "w-full p-6 flex justify-center" }}
+              />
             </div>
           </main>
         </div>
