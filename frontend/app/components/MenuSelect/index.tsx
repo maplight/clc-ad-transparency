@@ -15,6 +15,7 @@ const MenuSelect = (props: UseMenuProps) => {
         refine((event.target as HTMLSelectElement).value);
       }}
     >
+      <option value="">All</option>
       {items.map((item, index) => (
         <option key={index} value={item.value}>
           {item.label}
