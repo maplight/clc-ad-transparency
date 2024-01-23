@@ -29,6 +29,7 @@ export const loader = async () => {
   return json({
     ENV: {
       ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
+      ALGOLIA_BROWSE_API_KEY: process.env.ALGOLIA_BROWSE_API_KEY,
       ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY,
     },
   });
