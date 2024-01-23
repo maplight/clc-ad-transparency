@@ -57,17 +57,27 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
               Ad Disclosure Information
             </h2>
 
-            <div className="flex items-center">
-              <BanknotesIcon
-                className="h-6 w-6 text-green-500"
-                aria-hidden="true"
-              />
-              <p className="text-lg text-gray-900 sm:text-xl ml-2">{`$${new Intl.NumberFormat().format(
-                hit.adSpend
-              )}`}</p>
+            <div className="grid grid-cols-2 xl:grid-cols-4">
+              <div>
+                <h2 className="sr-only">Clicks</h2>
+                <div className="flex items-center">
+                  <div>
+                    <div className="flex items-center">
+                      <BanknotesIcon
+                        className="h-6 w-6 text-green-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <p className="sr-only">{`${hit.adSpend} ad spend`}</p>
+                  </div>
+                  <p className="text-lg text-gray-900 sm:text-xl ml-2">{`$${new Intl.NumberFormat().format(
+                    hit.adSpend
+                  )}`}</p>
+                </div>
+              </div>
 
               {hit.clickCount && (
-                <div className="ml-4 border-l border-gray-300 pl-4">
+                <div className="xl:ml-4 xl:border-l xl:border-gray-300 xl:pl-4">
                   <h2 className="sr-only">Clicks</h2>
                   <div className="flex items-center">
                     <div>
@@ -82,7 +92,7 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
               )}
 
               {hit.viewCount && (
-                <div className="ml-4 border-l border-gray-300 pl-4">
+                <div className="xl:ml-4 xl:border-l xl:border-gray-300 xl:pl-4">
                   <h2 className="sr-only">Views</h2>
                   <div className="flex items-center">
                     <div>
@@ -96,7 +106,7 @@ const AdDisclosureCard = ({ hit }: Props): ReactElement => {
                 </div>
               )}
 
-              <div className="ml-4 border-l border-gray-300 pl-4">
+              <div className="xl:ml-4 xl:border-l xl:border-gray-300 xl:pl-4">
                 <Format format={hit.adFormat} />
               </div>
             </div>
