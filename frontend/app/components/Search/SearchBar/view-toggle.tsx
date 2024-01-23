@@ -14,7 +14,7 @@ const nonActiveClasses =
 
 const ViewToggle = ({ setView, view }: Props): ReactElement => {
   return (
-    <>
+    <div className="flex flex-row justify-around gap-2">
       <button
         type="button"
         className={`rounded-full p-1.5 shadow-sm ${
@@ -39,7 +39,7 @@ const ViewToggle = ({ setView, view }: Props): ReactElement => {
           aria-hidden="true"
         />
       </button>
-    </>
+    </div>
   );
 };
 
