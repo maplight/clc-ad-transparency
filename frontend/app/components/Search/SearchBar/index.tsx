@@ -5,7 +5,8 @@ import ViewToggle from "./view-toggle";
 import type { ReactElement } from "react";
 
 type Props = {
-  setView: (view: "list" | "table") => void;
+  setMobileSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  setView: Dispatch<SetStateAction<"list" | "table">>;
   view: "list" | "table";
 };
 
@@ -61,15 +62,17 @@ const sortOptions = [
   },
 ];
 
-const SearchBar = ({ setView, view }: Props): ReactElement => {
+const SearchBar = ({
+  setMobileSidebarOpen,
+  setView,
+  view,
+}: Props): ReactElement => {
   return (
     <div className="z-40 flex h-20 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8 pt-4">
       <button
         type="button"
         className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
-        onClick={() => {
-          // TODO: Implement sidebar
-        }}
+        onClick={() => setMobileSidebarOpen(true)}
       >
         <span className="sr-only">Open sidebar</span>
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />

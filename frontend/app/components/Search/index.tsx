@@ -21,11 +21,15 @@ type Props = {
 
 const Search = ({ serverState, serverUrl }: Props): ReactElement => {
   const [view, setView] = useState<"list" | "table">("table");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   return (
     <InstantSearchSSRProvider {...serverState}>
       <InstantSearch
         searchClient={searchClient}
         indexName={`ad_disclosures_${process.env.NODE_ENV}`}
+        future={{
+          preserveSharedStateOnUnmount: true,
+        }}
         routing={{
           router: history({
             getLocation() {
@@ -38,10 +42,17 @@ const Search = ({ serverState, serverUrl }: Props): ReactElement => {
           }),
         }}
       >
-        <FiltersSidebar />
-        <div className="lg:pl-72 h-full">
+        <FiltersSidebar
+          mobileSidebarOpen={mobileSidebarOpen}
+          setMobileSidebarOpen={setMobileSidebarOpen}
+        />
+        <div className="lg:pl-80 h-full">
           <HeaderSpacer />
-          <SearchBar setView={setView} view={view} />
+          <SearchBar
+            setMobileSidebarOpen={setMobileSidebarOpen}
+            setView={setView}
+            view={view}
+          />
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
               {view === "table" ? <AdDisclosureTable /> : <AdDisclosureList />}
