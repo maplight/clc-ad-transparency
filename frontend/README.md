@@ -28,7 +28,11 @@ Open up [http://localhost:3000](http://localhost:3000) and you should be ready t
 
 The following environment variables are required to [initialize the Algolia search client](https://www.algolia.com/doc/api-client/getting-started/initialize/javascript/?client=javascript):
 
-* `ALGOLIA_APPLICATION_ID`
-* `ALGOLIA_SEARCH_API_KEY`
+- `ALGOLIA_APPLICATION_ID`
+- `ALGOLIA_SEARCH_API_KEY`
+
+The following environment variable is used to return [all results from Algolia without pagination](https://www.algolia.com/doc/api-reference/api-methods/browse/) when constructing the CSV export:
+
+- `ALGOLIA_BROWSE_API_KEY`
 
 **NOTE:** The frontend should use the Search-Only API Key from the Algolia dashboard.
