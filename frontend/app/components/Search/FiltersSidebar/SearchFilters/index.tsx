@@ -125,6 +125,11 @@ const SearchFilters = () => {
           </Card>
         </li>
         <li>
+          <Card title="Start Date">
+            <DateSelect attribute="startDateTimestamp" />
+          </Card>
+        </li>
+        <li>
           <Card title="End Date">
             <DateSelect attribute="endDateTimestamp" />
           </Card>
