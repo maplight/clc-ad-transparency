@@ -1,11 +1,11 @@
-import DownloadCsv from "./download-csv";
 import { SearchBox, SortBy } from "react-instantsearch";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import ViewToggle from "./view-toggle";
-import type { ReactElement } from "react";
+import OptionsMenu from "./options-menu";
+import type { ReactElement, Dispatch, SetStateAction } from "react";
 
 type Props = {
-  setView: (view: "list" | "table") => void;
+  setMobileSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  setView: Dispatch<SetStateAction<"list" | "table">>;
   view: "list" | "table";
 };
 
@@ -61,15 +61,17 @@ const sortOptions = [
   },
 ];
 
-const SearchBar = ({ setView, view }: Props): ReactElement => {
+const SearchBar = ({
+  setMobileSidebarOpen,
+  setView,
+  view,
+}: Props): ReactElement => {
   return (
     <div className="z-40 flex h-20 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8 pt-4">
       <button
         type="button"
         className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
-        onClick={() => {
-          // TODO: Implement sidebar
-        }}
+        onClick={() => setMobileSidebarOpen(true)}
       >
         <span className="sr-only">Open sidebar</span>
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -81,7 +83,7 @@ const SearchBar = ({ setView, view }: Props): ReactElement => {
       <SearchBox
         classNames={{
           form: "flex flex-1 h-full w-full",
-          root: "flex flex-1 h-full w-full py-3",
+          root: "flex flex-1 h-full w-full py-3 min-w-[150px]",
         }}
         placeholder="Search..."
       />
@@ -89,13 +91,12 @@ const SearchBar = ({ setView, view }: Props): ReactElement => {
       <SortBy
         classNames={{
           select:
-            "block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6",
+            "block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6",
         }}
         items={sortOptions}
       />
 
-      <DownloadCsv />
-      <ViewToggle setView={setView} view={view} />
+      <OptionsMenu view={view} setView={setView} />
     </div>
   );
 };
