@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import { CalendarIcon } from "@heroicons/react/24/outline";
 import ReactDatePicker from "react-datepicker";
+import type { UseRangeProps } from "react-instantsearch";
 import { useRange } from "react-instantsearch";
 import { useState, useEffect } from "react";
 
@@ -10,10 +11,8 @@ const DatePicker =
   (ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ??
   ReactDatePicker;
 
-const DateSelect = (): ReactElement => {
-  const { range, refine, start } = useRange({
-    attribute: "endDateTimestamp",
-  });
+const DateSelect = (props: UseRangeProps): ReactElement => {
+  const { range, refine, start } = useRange(props);
 
   const { min, max } = range;
 
